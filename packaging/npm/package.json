@@ -12,7 +12,20 @@
   "engines": {
     "node": ">=18"
   },
-  "keywords": ["tui", "data-visualization", "csv", "excel", "charts", "matplotlib"],
+  "keywords": [
+    "tui",
+    "data-visualization",
+    "csv",
+    "excel",
+    "charts",
+    "matplotlib"
+  ],
   "license": "MIT",
-  "author": "Md Rafsun Sheikh"
+  "author": "Md Rafsun Sheikh",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rafsunsheikh/vizdesk.git",
+    "directory": "packaging/npm"
+  },
+  "homepage": "https://github.com/rafsunsheikh/vizdesk"
 }

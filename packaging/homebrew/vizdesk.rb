@@ -1,12 +1,12 @@
-# Homebrew formula for a personal tap, e.g. github.com/<you>/homebrew-tap
+# Homebrew formula for a personal tap, e.g. github.com/rafsunsheikh/homebrew-tap
 # Users install it with:
-#   brew install <you>/tap/vizdesk
+#   brew install rafsunsheikh/tap/vizdesk
 #
 # Before each release, update `url` and `sha256` to the new sdist on PyPI:
 #   curl -sL https://pypi.org/pypi/vizdesk/json | jq -r '.urls[] | select(.packagetype=="sdist") | .url, .digests.sha256'
 class Vizdesk < Formula
   desc "Terminal app that suggests cleaning and charts for CSV/Excel files and draws PNGs"
-  homepage "https://pypi.org/project/vizdesk/"
+  homepage "https://github.com/rafsunsheikh/vizdesk"
   url "https://files.pythonhosted.org/packages/source/v/vizdesk/vizdesk-0.2.0.tar.gz"
   sha256 "REPLACE_WITH_SDIST_SHA256"
   license "MIT"

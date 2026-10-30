@@ -40,7 +40,7 @@ VIZDESK_LAUNCHER=venv VIZDESK_PIP_SPEC="$PWD/dist/vizdesk-0.2.0-py3-none-any.whl
    curl -sL https://pypi.org/pypi/vizdesk/json \
      | jq -r '.urls[] | select(.packagetype=="sdist") | .url, .digests.sha256'
    ```
-4. Push. Users run `brew install <your-user>/tap/vizdesk`.
-5. Check: `brew install --build-from-source <your-user>/tap/vizdesk && brew test vizdesk`.
+4. Push. Users run `brew install rafsunsheikh/tap/vizdesk`.
+5. Check: `brew install --build-from-source rafsunsheikh/tap/vizdesk && brew test vizdesk`.
 
 The formula installs pandas, numpy and matplotlib from PyPI wheels inside its own virtual environment. That is fine for a personal tap. homebrew-core would instead require every dependency to be declared as a source "resource", and is not a goal for now.

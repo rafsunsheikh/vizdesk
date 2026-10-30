@@ -26,6 +26,10 @@ dependencies = [
   "textual>=0.80",
 ]
 
+[project.urls]
+Homepage = "https://github.com/rafsunsheikh/vizdesk"
+Issues = "https://github.com/rafsunsheikh/vizdesk/issues"
+
 [project.optional-dependencies]
 dev = ["pytest>=8", "pytest-asyncio>=0.23"]
 

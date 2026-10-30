@@ -10,4 +10,4 @@ vizdesk auto sales.csv     # draw suggested charts without the UI
 vizdesk --help
 ```
 
-Full documentation: https://pypi.org/project/vizdesk/
+Full documentation: https://github.com/rafsunsheikh/vizdesk

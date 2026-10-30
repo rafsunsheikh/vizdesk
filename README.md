@@ -18,7 +18,7 @@ The chart catalog (66 techniques, each with a description, the data it needs, wh
 |---|---|
 | pip / pipx / uv | `pipx install vizdesk` or `uv tool install vizdesk` |
 | npm | `npm install -g vizdesk` (runs the Python package through uv, pipx, or a private venv) |
-| Homebrew | `brew install <your-user>/tap/vizdesk` |
+| Homebrew | `brew install rafsunsheikh/tap/vizdesk` |
 
 Python 3.10 or newer is required (npm and Homebrew set that up for you).
 
