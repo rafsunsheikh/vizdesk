@@ -188,7 +188,14 @@ def _grouped(ax, df, p):
 
 def _stacked(ax, df, p, percent: bool):
     wide = _pivot(df, p)
+    hidden = 0
     if percent:
+        # A group of 2 rows can show a 100% bar; hide groups too small to trust (option min_rows, default 10).
+        sizes = df[p.x].astype(object).where(df[p.x].notna(), MISSING).value_counts()
+        small = [i for i in wide.index if sizes.get(i, 0) < int(_opt(p, "min_rows", 10))]
+        if len(small) < len(wide.index):
+            hidden = len(small)
+            wide = wide.drop(index=small)
         wide = wide.div(wide.sum(axis=1).replace(0, np.nan), axis=0) * 100
     bottom = np.zeros(len(wide.index))
     labels = [_short(i) for i in wide.index]
@@ -196,8 +203,10 @@ def _stacked(ax, df, p, percent: bool):
         ax.bar(labels, wide[col].to_numpy(), bottom=bottom, label=str(col))
         bottom += wide[col].to_numpy()
     _rotate_if_crowded(ax, labels)
-    ax.legend(title=p.hue, fontsize="small")
-    _labels(ax, p, p.x, "% of bar" if percent else _value_label(p), f"{p.hue} within {p.x}")
+    ax.legend(title=p.hue, fontsize="small", loc="upper left", bbox_to_anchor=(1.01, 1), borderaxespad=0)
+    title = f"Share of {p.hue} in each {p.x}" if percent else f"{_value_label(p)} by {p.x} and {p.hue}"
+    _labels(ax, p, p.x + (f" ({hidden} group{'s' if hidden > 1 else ''} under {int(_opt(p, 'min_rows', 10))} rows hidden)" if hidden else ""),
+            "% of rows" if percent else _value_label(p), title)
 
 
 @chart("stacked_bar_graph", x=(CAT, True), hue=(CAT, True), y=(NUM, False), hint="Totals per category split into parts")
@@ -205,7 +214,7 @@ def _stacked_bar(ax, df, p):
     _stacked(ax, df, p, percent=False)
 
 
-@chart("stacked_bar_100", x=(CAT, True), hue=(CAT, True), y=(NUM, False), hint="Share of each part within each category")
+@chart("stacked_bar_100", options="min_rows=10", x=(CAT, True), hue=(CAT, True), y=(NUM, False), hint="Share of each part within each category")
 def _stacked_100(ax, df, p):
     _stacked(ax, df, p, percent=True)
 

@@ -62,6 +62,11 @@ class Target:
     def describe(self) -> str:
         return f"'{self.column}'" + (f" (share of '{self.positive}')" if self.positive else "")
 
+    @property
+    def outcome(self) -> str:
+        """'Churn = Yes' or 'Survived = 1': the class whose share the charts report."""
+        return f"{self.column} = {self.positive}"
+
 
 @dataclass
 class Context:
@@ -377,8 +382,8 @@ def _target_rules(ctx: Context, add, boost: float = 0) -> None:
                 continue
             spread = rates.max() - rates.min()
             add(78 + boost + 15 * spread - i, PanelSpec("stacked_bar_100", x=c.name, hue=t.column, options=_order(c),
-                reason=f"The {t.positive} rate of {t.column} ranges from {_pct(rates.min())} ({rates.index[0]}) to "
-                       f"{_pct(rates.max())} ({rates.index[-1]}) across '{c.name}'."))
+                reason=f"The share of rows with {t.outcome} ranges from {_pct(rates.min())} ({c.name} = {rates.index[0]}) "
+                       f"to {_pct(rates.max())} ({c.name} = {rates.index[-1]})."))
         nums = sorted((c for c in ctx.measures if c.name != t.column), key=lambda c: -ctx.stats.get(c.name, 0))
         for i, c in enumerate(nums[:3]):
             d = ctx.stats.get(c.name, 0)
