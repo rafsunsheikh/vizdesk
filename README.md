@@ -1,125 +1,206 @@
-# vizdesk
+<div align="center">
 
-A terminal app for data visualization work. Point it at a CSV or Excel file and it will:
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/rafsunsheikh/vizdesk/main/docs/images/logo-dark.svg">
+  <img alt="vizdesk" src="https://raw.githubusercontent.com/rafsunsheikh/vizdesk/main/docs/images/logo-light.svg" width="380">
+</picture>
 
-1. **Profile every column**: numbers, categories (including ordered ones such as class 1/2/3), dates, years, IDs and codes, free text, comma-separated lists, "number + unit" values such as `90 min`, gaps, outliers, skew and capped values.
-2. **Suggest cleaning and normalization**, each with a plain reason (for example "`TotalCharges` is stored as text and 11 values are only spaces").
-3. **Find the target** (churn, survived, price ...) or let you pick one, and **suggest charts** for your goal, the way popular Kaggle EDA notebooks do: the target rate per category, a histogram of every numeric column, top-N rankings, trends, maps, hierarchies.
-4. **Draw PNG figures** with the grid, size, DPI and padding you choose, in a colorblind-safe palette by default.
-5. **Save four files per figure**: the PNG, a recipe to reopen and redraw it, a Python script that recreates it in a notebook, and alt text describing it.
+**From spreadsheet to clear charts, right in your terminal.**
 
-All suggestions come from fixed rules and statistics computed on your data. No LLM and no internet connection are used.
+[![PyPI](https://img.shields.io/pypi/v/vizdesk?color=006ba4)](https://pypi.org/project/vizdesk/)
+[![npm](https://img.shields.io/npm/v/vizdesk?color=ff800e)](https://www.npmjs.com/package/vizdesk)
+[![Python 3.10+](https://img.shields.io/badge/python-3.10%2B-5f9ed1)](https://pypi.org/project/vizdesk/)
+[![License: MIT](https://img.shields.io/badge/license-MIT-c85200)](https://github.com/rafsunsheikh/vizdesk/blob/main/LICENSE)
 
-The chart catalog (66 techniques, each with a description, the data it needs, when to use it and its limits) comes from the Data Scientists Handbook chart catalog, which is based on the Data Visualisation Catalogue (datavizcatalogue.com). **vizdesk can draw all 66.**
+<img src="https://raw.githubusercontent.com/rafsunsheikh/vizdesk/main/docs/images/vizdesk-demo.gif" alt="vizdesk walking through the Titanic dataset: column profile, cleaning steps, chart suggestions for the Survived target, figure layout, and a preview of the drawn PNG" width="860">
+
+<sub>Loading Titanic data, accepting the cleaning steps, asking "what goes with survival?", and drawing the answer.</sub>
+
+[Install](#install) · [Quick start](#quick-start) · [Tour](#a-quick-tour) · [Command line](#command-line) · [How it decides](#how-it-decides)
+
+</div>
+
+vizdesk reads your CSV or Excel files, tells you what needs cleaning, and suggests the charts a data scientist would draw first, each with the reason and the numbers behind it. You pick, tweak the layout, and get PNGs, plus the Python code to rebuild them in a notebook.
+
+There is **no LLM** inside. Every suggestion comes from fixed rules and statistics on your data, so it runs offline, gives the same answer every time, and never sends your data anywhere.
+
+## Features
+
+- 🔎 **Understands your columns**: numbers, categories, dates, years, IDs, comma-separated lists, `90 min` style values, gaps, outliers, caps.
+- 🧹 **Suggests cleaning** with a plain reason for each step. Safe fixes run on their own; the rest wait for you, and can be undone.
+- 🎯 **Finds the target** (churn, survived, price ...) and shows what goes with it, the way top Kaggle notebooks do.
+- 📊 **66 chart types**, from histograms to sankey, chord, sunburst, calendar and candlestick, each explained in a built-in catalog [1].
+- 🧩 **Your layout**: rows × columns, figure size, DPI, padding on or off, colorblind-safe colours by default.
+- 🔁 **Redraw anything**: every PNG keeps a recipe, so you can change charts, columns or layout later.
+- 📓 **Notebook-ready**: every figure comes with a Python script whose cleaning steps are plain pandas.
+- ♿ **Alt text** for every figure, written from the data and stored inside the PNG.
+- 🖼️ **Preview in the terminal** with Kitty, Ghostty, iTerm2, WezTerm or sixel graphics, or coloured blocks anywhere.
 
 ## Install
 
-| Tool | Command |
-|---|---|
-| pip / pipx / uv | `pipx install vizdesk` or `uv tool install vizdesk` |
-| npm | `npm install -g vizdesk` (runs the Python package through uv, pipx, or a private venv) |
-| Homebrew | `brew install rafsunsheikh/tap/vizdesk` |
+```bash
+uv tool install vizdesk        # or: pipx install vizdesk
+```
 
-Python 3.10 or newer is required (npm and Homebrew set that up for you).
+Try it without installing: `uvx vizdesk data.csv`
+
+<details>
+<summary>npm and Homebrew</summary>
+
+```bash
+npm install -g vizdesk                 # runs the Python package through uv, pipx or a private environment
+brew install rafsunsheikh/tap/vizdesk  # or: brew tap rafsunsheikh/tap, then brew install vizdesk
+```
+
+All three install the same app. Python 3.10 or newer is needed; npm and Homebrew set it up for you.
+</details>
 
 ## Quick start
 
 ```bash
-vizdesk                                   # open the terminal UI
-vizdesk churn.csv                         # open the UI with a file loaded
-vizdesk auto data/ --goal target --show   # no UI: every CSV/Excel file in data/ to PNGs, previewed in the terminal
+vizdesk                          # open the app, then load a file from the Data tab
+vizdesk sales.xlsx               # open the app with a file loaded (every sheet becomes a table)
+vizdesk auto data/ --goal target # no app: draw the top suggestions for every CSV/Excel file in data/
 ```
 
-## The terminal UI
+Your files are never changed. Figures go to `./vizdesk-output` unless you pass `-o`.
 
-| Tab (key) | What you do there |
+## A quick tour
+
+<table>
+  <tr>
+    <td width="50%"><img src="https://raw.githubusercontent.com/rafsunsheikh/vizdesk/main/docs/images/tui-suggest.svg" alt="Suggest tab listing ranked chart suggestions for the Survived target, with the reason for the highlighted one"></td>
+    <td width="50%"><img src="https://raw.githubusercontent.com/rafsunsheikh/vizdesk/main/docs/images/tui-compose.svg" alt="Compose tab with the panel list, the settings of one panel, and the figure layout controls"></td>
+  </tr>
+  <tr>
+    <td><b>Suggest.</b> Pick a goal and a target; each chart comes with its reason, like <i>"the share of rows with Survived = 1 ranges from 19% (male) to 74% (female)"</i>.</td>
+    <td><b>Compose.</b> Change any panel's chart, columns, aggregation or options, and set the grid, size, DPI and padding.</td>
+  </tr>
+  <tr>
+    <td><img src="https://raw.githubusercontent.com/rafsunsheikh/vizdesk/main/docs/images/tui-preview.svg" alt="Preview tab showing the drawn figure in the terminal with its alt text below"></td>
+    <td><img src="https://raw.githubusercontent.com/rafsunsheikh/vizdesk/main/docs/images/tui-catalog.svg" alt="Catalog tab searching for flow charts and showing the details of one technique"></td>
+  </tr>
+  <tr>
+    <td><b>Preview.</b> See the figure in the terminal with its alt text, then open it full size.</td>
+    <td><b>Catalog.</b> Search all 66 techniques: what each shows, the data it needs, when to use it and its limits.</td>
+  </tr>
+</table>
+
+<details>
+<summary>The Data and Clean tabs</summary>
+
+<img src="https://raw.githubusercontent.com/rafsunsheikh/vizdesk/main/docs/images/tui-data.svg" alt="Data tab with the column profile of the Titanic file and a preview of its rows">
+<img src="https://raw.githubusercontent.com/rafsunsheikh/vizdesk/main/docs/images/tui-clean.svg" alt="Clean tab listing suggested cleaning steps, safe ones already ticked">
+</details>
+
+### Keys
+
+| Key | Action | Key | Action |
+|---|---|---|---|
+| `F1` | Data: load files, see the profile | `F5` | Gallery: reopen any saved figure |
+| `F2` | Clean: tick cleaning steps | `F6` | Catalog: browse chart types |
+| `F3` | Suggest: goal, target, suggestions | `F7` | Preview the last figure |
+| `F4` | Compose: panels and layout | `ctrl+d` | Draw the PNG |
+| `ctrl+o` | Open the PNG in your image viewer | `ctrl+q` | Quit |
+
+## What you get
+
+<img src="https://raw.githubusercontent.com/rafsunsheikh/vizdesk/main/docs/images/example-titanic-target.png" alt="Six charts from the Titanic data: survival share by sex, class, port and family size, the overall survival split, and fare by survival">
+
+<sub>`vizdesk auto titanic.csv --goal target`: the six charts it picked, unedited.</sub>
+
+<details>
+<summary>Two more examples: California housing and Netflix titles</summary>
+
+<img src="https://raw.githubusercontent.com/rafsunsheikh/vizdesk/main/docs/images/example-housing-explore.png" alt="Overview of California housing: house value against income, value distribution with the cap at 500,001, a map coloured by value, and value by ocean proximity">
+<img src="https://raw.githubusercontent.com/rafsunsheikh/vizdesk/main/docs/images/example-netflix-explore.png" alt="Overview of Netflix titles: movie lengths, titles by type and rating, titles added per year, and the most common genres">
+</details>
+
+Each figure is saved as four files:
+
+| File | For |
 |---|---|
-| Data (F1) | Load a file or folder, pick a table or Excel sheet, see the column profile and a preview. |
-| Clean (F2) | Tick cleaning steps. `SAFE` steps (type fixes, trimming spaces, splitting `90 min` into number and unit, dropping empty and leftover index columns) are ticked for you. Others, such as filling gaps, capping outliers, removing capped rows, grouping ages into ranges or adding year/month columns, wait for you. Unticking undoes a step, because cleaning always re-runs from the original file. |
-| Suggest (F3) | Pick a goal and, if you like, a target column, press **Auto scan**, read why each chart is suggested, then add the ticked ones to a figure or draw them all at once. |
-| Compose (F4) | Edit each panel (chart type, x, y, colour, size, multi-column list, aggregation, title, top N, bins, log scale, options) and the figure layout (rows, columns, width, height, DPI, padding on/off, padding size, theme, file name). **ctrl+d** draws, **ctrl+o** opens the PNG. |
-| Gallery (F5) | Every figure in the output folder. Pick one and press **Edit & redraw** to change it. |
-| Catalog (F6) | Search all 66 techniques. **Use this chart** adds it as a new panel. |
-| Preview (F7) | The last drawn (or picked) figure, drawn in the terminal, with its alt text and script name. |
-
-Your original files are never changed. Figures go to `./vizdesk-output` unless you pass `-o`.
+| `figure.png` | the image, with its alt text stored inside |
+| `figure.vizdesk.json` | the recipe: source, cleaning, layout and panels, used to redraw |
+| `figure.py` | a script that recreates the figure; paste its `# %%` cells into a notebook |
+| `figure.alt.txt` | alt text for reports and screen readers, e.g. *"Laptop is highest at 652,645 (40% of the total)"* |
 
 ## Command line
 
+Everything the app does also works from the command line, for scripts and pipelines.
+
 ```bash
-vizdesk catalog part whole                  # search the catalog
-vizdesk catalog --show sankey_diagram       # full details of one technique
-vizdesk goals                               # the goals suggestions can target
-vizdesk scan churn.csv --goal target        # profile, cleaning and chart suggestions, printed
-vizdesk scan housing.csv --target median_house_value
-
-# auto: safe cleaning, top suggestions, split into 2x3 grids, no padding, 300 dpi
-vizdesk auto sales.csv --goal explore --count 12 --rows 2 --cols 3 --width 15 --height 9 --dpi 300 --no-padding
-
-# manual: choose every chart yourself
+vizdesk scan churn.csv --goal target                # print the profile, cleaning steps and suggestions
+vizdesk auto sales.csv --count 12 --rows 2 --cols 3 --dpi 300 --no-padding --show
 vizdesk draw sales.csv \
-  --panel chart=bar_chart,x=region,y=revenue,agg=sum \
+  --panel chart=bar_chart,x=region,y=revenue \
   --panel chart=sunburst_diagram,columns=Category+Sub-Category,y=Sales \
-  --panel chart=line_graph,x=date,y=close,filter=Name=AAPL,rolling=50 \
-  --rows 1 --cols 3 --width 18 --height 5 -o out/sales.png
-
-# redraw: change panel 1, add a panel, widen the grid
-vizdesk redraw out/sales.png --set 1:chart=violin_plot,y=revenue --add-panel chart=pie_chart,x=channel --cols 3
-
-# preview in the terminal (Kitty, Ghostty, iTerm2, WezTerm, sixel, or coloured blocks anywhere)
-vizdesk show out/sales.png
+  --rows 1 --cols 2 -o out/sales.png               # pick every chart yourself
+vizdesk redraw out/sales.png --set 1:chart=violin_plot --cols 3
+vizdesk catalog part whole                          # search the chart catalog
+vizdesk show out/sales.png                          # preview a PNG in the terminal
 ```
 
-Panel fields: `chart`, `x`, `y`, `hue` (colour), `size`, `columns=a+b+c` (multi-column charts), `agg` (`auto`, `count`, `sum`, `mean`, `median`, `min`, `max`), `title`, `top_n`, `bins`, `log_y`. `agg=auto` sums columns whose names look like totals (sales, revenue, units ...) and averages the rest.
+<details>
+<summary>Panel fields and options</summary>
 
-Any other `key=value` is a chart option. Options every chart understands:
+Fields: `chart`, `x`, `y`, `hue` (colour), `size`, `columns=a+b+c`, `agg` (`auto`, `count`, `sum`, `mean`, `median`, `min`, `max`), `title`, `top_n`, `bins`, `log_y`. `agg=auto` sums columns that look like totals (sales, revenue, units ...) and averages the rest.
 
-| Option | Example | What it does |
+Any other `key=value` is an option:
+
+| Option | Example | Effect |
 |---|---|---|
-| `filter` | `filter=Name=AAPL` or `filter=region=North\|South` | keep only matching rows |
-| `split` | `split=listed_in` | count each item of a comma-separated list column |
-| `order` | `order=label` | keep a natural order (1, 2, 3; age bands) instead of biggest first |
-| `log` | `log=x`, `log=y`, `log=xy` | log scale (zeros use a symmetric log) |
+| `filter` | `filter=Name=AAPL`, `filter=region=North\|South` | keep only matching rows |
+| `split` | `split=listed_in` | count each item of a comma-separated column |
+| `order` | `order=label` | natural order (1, 2, 3; age bands) instead of biggest first |
+| `log` | `log=x`, `log=y`, `log=xy` | log scale; zeros use a symmetric log |
+| `min_rows` | `min_rows=30` | hide groups smaller than this in 100% bars (default 10) |
 
-Some charts read their own options, for example `rolling=50` (line), `reversal=4%` (kagi), `box=1; reversal=3` (point and figure), `last=120` (candlestick), `geojson=regions.geojson; key=name` (maps). The Compose tab shows the options of the selected chart.
+Some charts read their own, such as `rolling=50` (line), `reversal=4%` (kagi), `last=120` (candlestick) and `geojson=regions.geojson; key=name` (maps). The Compose tab lists them for the selected chart.
+</details>
 
-## Goals
+## How it decides
 
-| Goal | Typical charts |
+You pick a goal; vizdesk picks the charts that answer it for your columns.
+
+| Goal | What it reaches for |
 |---|---|
-| explore | a balanced overview: the best one or two charts from each goal below |
-| target | target share, the target rate in every category (100% stacked bars), numeric columns split by the target; for a numeric target, its strongest partners |
-| distribution | histogram grid of every numeric column, histograms (log scale for long tails), box, violin, density, ECDF, Q-Q |
-| comparison | bar, grouped bar, error bars, radar, top 15 of a many-valued column |
-| relationship | scatter or hexbin for the strongest pairs, correlation heatmap, scatter matrix, bubble, parallel coordinates |
-| composition | sunburst and treemap for hierarchies (Category > Sub-Category), donut, pie, 100% stacked bar, stacked area |
-| trend | lines over dates or years, by group, year by month heatmap, calendar; for price data, candlestick, moving average and the most traded series |
-| ranking | top 15 bars (by a total or by count, never by an average of tiny groups), lollipop, dot plot, span |
-| data_quality | missing values map, outlier box plots, capped-value histograms |
+| **explore** | a balanced overview: the best one or two charts of each goal below |
+| **target** | the target split, its share in every category, numeric columns split by it |
+| **distribution** | a histogram of every numeric column, log scales for long tails, box, violin, density |
+| **comparison** | totals and averages by group, grouped bars, error bars, top 15 of many-valued columns |
+| **relationship** | the strongest pairs (skipping near-duplicates), correlation heatmap, bubble, scatter matrix |
+| **composition** | hierarchies such as Category > Sub-Category as sunburst or treemap; shares of totals only |
+| **trend** | lines over dates or years, year × month heatmap; candlestick and moving average for prices |
+| **ranking** | top 15 by a total or by count, never by an average of tiny groups |
+| **data quality** | missing values, outliers, capped values |
 
-Maps appear when there are longitude and latitude columns; word charts appear for free text.
+The rules were tuned on seven popular Kaggle datasets (Telco churn, Titanic, California housing, Netflix, Superstore, S&P 500, Wine reviews) and checked against the charts drawn in their top-voted notebooks [2]. Each fix is kept as a test.
 
-## The four files of a figure
+## Alternatives
 
-| File | What it is for |
-|---|---|
-| `figure.png` | the image (alt text is also stored inside it) |
-| `figure.vizdesk.json` | the recipe: source file and sheet, cleaning steps, layout and panels. Used by Gallery and `vizdesk redraw`. |
-| `figure.py` | a Python script that recreates the figure. Loading and cleaning are plain pandas; paste the `# %%` cells into a notebook to change them. |
-| `figure.alt.txt` | alt text for reports and screen readers, written by rules from the data (for example "Laptop is highest at 652,645, 40% of the total"). |
+vizdesk is for getting from a raw table to finished figures. If you mainly want to look at or edit the table itself, or want a report page, these are excellent:
 
-## How it was checked
-
-The rules were tuned against 7 popular Kaggle datasets (Telco churn, Titanic, California housing, Netflix, Superstore, S&P 500 stocks, Wine reviews) and the EDA charts of their top-voted notebooks. `tests/test_kaggle_shapes.py` keeps each fix as a regression test on a small table of the same shape, and runs on the real files too when they are in `datasets/kaggle/`.
+- [VisiData](https://github.com/saulpw/visidata): a terminal spreadsheet multitool for exploring and reshaping data.
+- [Tabiew](https://github.com/shshemi/tabiew) and [csvlens](https://github.com/YS-L/csvlens): fast viewers for CSV, TSV and Parquet files.
+- [ydata-profiling](https://github.com/ydataai/ydata-profiling): a full EDA report as an HTML page, in a notebook or browser.
 
 ## Development
 
 ```bash
+git clone https://github.com/rafsunsheikh/vizdesk && cd vizdesk
 uv venv && uv pip install -e '.[dev]'
-python examples/make_examples.py   # messy sample data
 pytest
 ```
 
-To refresh the catalog from the handbook: `python scripts/build_catalog.py path/to/_chart_catalog_reference.md`.
+The chart catalog is generated from the Data Scientists Handbook with `scripts/build_catalog.py`; the README images come from `scripts/make_readme_images.py`. Releases go to PyPI, npm and Homebrew as described in [PACKAGING.md](https://github.com/rafsunsheikh/vizdesk/blob/main/PACKAGING.md). Issues and pull requests are welcome.
 
-See [PACKAGING.md](https://github.com/rafsunsheikh/vizdesk/blob/main/PACKAGING.md) for releasing to PyPI, npm and Homebrew.
+## License
+
+MIT. Built with [Textual](https://textual.textualize.io) and [matplotlib](https://matplotlib.org) [3].
+
+## References
+
+1. The chart catalog is based on S. Ribecca, *The Data Visualisation Catalogue*, https://datavizcatalogue.com
+2. Kaggle datasets. The example images use the public-domain (CC0) [Titanic](https://www.kaggle.com/datasets/yasserh/titanic-dataset), [California housing](https://www.kaggle.com/datasets/camnugent/california-housing-prices) and [Netflix](https://www.kaggle.com/datasets/shivamb/netflix-shows) datasets.
+3. Textual, https://textual.textualize.io; matplotlib, https://matplotlib.org
