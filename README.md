@@ -122,4 +122,4 @@ pytest
 
 To refresh the catalog from the handbook: `python scripts/build_catalog.py path/to/_chart_catalog_reference.md`.
 
-See [PACKAGING.md](PACKAGING.md) for releasing to PyPI, npm and Homebrew.
+See [PACKAGING.md](https://github.com/rafsunsheikh/vizdesk/blob/main/PACKAGING.md) for releasing to PyPI, npm and Homebrew.
