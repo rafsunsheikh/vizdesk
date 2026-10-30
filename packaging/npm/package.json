@@ -1,0 +1,18 @@
+{
+  "name": "vizdesk",
+  "version": "0.2.0",
+  "description": "Terminal app that scans CSV and Excel files, suggests cleaning and charts, and draws PNG figures. No LLM needed. (npm launcher for the vizdesk Python package)",
+  "bin": {
+    "vizdesk": "bin/vizdesk.js"
+  },
+  "files": [
+    "bin/vizdesk.js",
+    "README.md"
+  ],
+  "engines": {
+    "node": ">=18"
+  },
+  "keywords": ["tui", "data-visualization", "csv", "excel", "charts", "matplotlib"],
+  "license": "MIT",
+  "author": "Md Rafsun Sheikh"
+}

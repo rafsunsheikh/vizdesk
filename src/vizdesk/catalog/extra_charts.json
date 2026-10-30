@@ -1,0 +1,270 @@
+[
+  {
+    "key": "ecdf_plot",
+    "name": "ECDF Plot",
+    "aliases": [
+      "Empirical Cumulative Distribution"
+    ],
+    "category": "Distributions",
+    "description": "A step line showing, for every value, the share of observations at or below it. Every data point is shown and there are no bins to choose.",
+    "data_required": "One continuous numerical column, optionally split by a categorical column.",
+    "use_when": "Comparing whole distributions between groups, reading off percentiles (for example 'what share of orders are under $50?').",
+    "limitations": "Less familiar to general audiences than a histogram.",
+    "similar": [
+      "Histogram",
+      "Density Plot"
+    ],
+    "tools": [
+      "matplotlib",
+      "seaborn",
+      "ggplot2"
+    ]
+  },
+  {
+    "key": "qq_plot",
+    "name": "Q-Q Plot",
+    "aliases": [
+      "Quantile-Quantile Plot",
+      "Normal probability plot"
+    ],
+    "category": "Distributions",
+    "description": "Plots the quantiles of your data against the quantiles of a normal distribution. Points on the diagonal mean the data is close to normal.",
+    "data_required": "One continuous numerical column.",
+    "use_when": "Checking whether a model assumption of normality holds, or spotting heavy tails and skew.",
+    "limitations": "Only compares against one reference distribution at a time.",
+    "similar": [
+      "Histogram",
+      "ECDF Plot"
+    ],
+    "tools": [
+      "scipy",
+      "statsmodels",
+      "R"
+    ]
+  },
+  {
+    "key": "histogram_grid",
+    "name": "Histogram Grid",
+    "aliases": [
+      "Small multiples of histograms",
+      "df.hist()"
+    ],
+    "category": "Distributions",
+    "description": "One small histogram for every numeric column, side by side, so the shape of each column can be compared at a glance.",
+    "data_required": "Two or more numerical columns.",
+    "use_when": "The first look at a new table: spotting skew, caps (a spike at the maximum), gaps and odd values in every column at once.",
+    "limitations": "Each panel has its own axis range, so heights are not comparable between panels.",
+    "similar": [
+      "Histogram",
+      "Scatter Matrix"
+    ],
+    "tools": [
+      "pandas",
+      "matplotlib",
+      "seaborn"
+    ]
+  },
+  {
+    "key": "stacked_bar_100",
+    "name": "100% Stacked Bar Chart",
+    "aliases": [
+      "Percent stacked bar"
+    ],
+    "category": "Compositions / Part-to-Whole",
+    "description": "A stacked bar where every bar is scaled to 100%, so you compare the share of each subcategory rather than totals.",
+    "data_required": "Two categorical columns, optionally a numerical value to sum.",
+    "use_when": "Comparing proportions across groups, for example the share of each product type per region.",
+    "limitations": "Hides the absolute totals. Middle segments have no common baseline.",
+    "similar": [
+      "Stacked Bar Graph",
+      "Marimekko Chart"
+    ],
+    "tools": [
+      "matplotlib",
+      "Excel",
+      "Tableau"
+    ]
+  },
+  {
+    "key": "dot_plot",
+    "name": "Dot Plot (Cleveland)",
+    "aliases": [
+      "Cleveland dot plot"
+    ],
+    "category": "Comparisons",
+    "description": "One dot per category placed at its value on a common scale. Uses less ink than a bar chart and does not need a zero baseline.",
+    "data_required": "One categorical column and one numerical value (or an aggregate of it).",
+    "use_when": "Ranking or comparing many categories, especially when values are far from zero.",
+    "limitations": "Less familiar than bars for some audiences.",
+    "similar": [
+      "Bar Chart",
+      "Lollipop Chart"
+    ],
+    "tools": [
+      "matplotlib",
+      "ggplot2"
+    ]
+  },
+  {
+    "key": "lollipop_chart",
+    "name": "Lollipop Chart",
+    "aliases": [],
+    "category": "Comparisons",
+    "description": "A bar chart where each bar is replaced by a thin line ending in a dot. Easier to read when there are many similar-length bars.",
+    "data_required": "One categorical column and one numerical value.",
+    "use_when": "Ranking categories, top-N lists.",
+    "limitations": "The dot centre is the value, which can be misread when dots are large.",
+    "similar": [
+      "Bar Chart",
+      "Dot Plot (Cleveland)"
+    ],
+    "tools": [
+      "matplotlib",
+      "ggplot2"
+    ]
+  },
+  {
+    "key": "dumbbell_chart",
+    "name": "Dumbbell Chart",
+    "aliases": [
+      "Connected dot plot"
+    ],
+    "category": "Comparisons",
+    "description": "Two dots per category joined by a line, showing the gap between two values such as before and after.",
+    "data_required": "One categorical column and two numerical columns measured on the same scale.",
+    "use_when": "Showing change or difference between two measurements per group.",
+    "limitations": "Only works for exactly two values per category.",
+    "similar": [
+      "Span Chart",
+      "Slope Chart"
+    ],
+    "tools": [
+      "matplotlib",
+      "ggplot2"
+    ]
+  },
+  {
+    "key": "heatmap",
+    "name": "Heatmap (Cross-tab)",
+    "aliases": [
+      "Matrix chart"
+    ],
+    "category": "Relationships / Correlations",
+    "description": "A grid where each cell is coloured by a value, such as the count of rows for each pair of categories.",
+    "data_required": "Two categorical columns, optionally a numerical value to aggregate.",
+    "use_when": "Finding which combinations of two categories are common or have high values.",
+    "limitations": "Colour is less precise than position; label every cell when exact values matter.",
+    "similar": [
+      "Marimekko Chart",
+      "Correlation Heatmap"
+    ],
+    "tools": [
+      "matplotlib",
+      "seaborn",
+      "Excel"
+    ]
+  },
+  {
+    "key": "correlation_heatmap",
+    "name": "Correlation Heatmap",
+    "aliases": [
+      "Correlation matrix"
+    ],
+    "category": "Relationships / Correlations",
+    "description": "A square grid showing the correlation between every pair of numerical columns, coloured from -1 (opposite) to +1 (move together).",
+    "data_required": "Three or more numerical columns.",
+    "use_when": "Getting a quick overview of which variables move together before modelling.",
+    "limitations": "Pearson correlation only captures straight-line relationships.",
+    "similar": [
+      "Scatter Matrix",
+      "Scatterplot"
+    ],
+    "tools": [
+      "pandas",
+      "seaborn",
+      "R corrplot"
+    ]
+  },
+  {
+    "key": "hexbin_plot",
+    "name": "Hexbin Plot",
+    "aliases": [
+      "2D histogram"
+    ],
+    "category": "Relationships / Correlations",
+    "description": "A scatterplot for big data: the plane is cut into hexagons and each is coloured by how many points fall in it.",
+    "data_required": "Two numerical columns, usually with thousands of rows.",
+    "use_when": "A scatterplot would be an unreadable blob because of overplotting.",
+    "limitations": "Individual outliers become hard to see.",
+    "similar": [
+      "Scatterplot",
+      "Density Plot"
+    ],
+    "tools": [
+      "matplotlib",
+      "seaborn",
+      "Plotly"
+    ]
+  },
+  {
+    "key": "scatter_matrix",
+    "name": "Scatter Matrix",
+    "aliases": [
+      "Pair plot",
+      "SPLOM"
+    ],
+    "category": "Relationships / Correlations",
+    "description": "A grid of scatterplots, one for every pair of numerical columns, with histograms on the diagonal.",
+    "data_required": "Three to six numerical columns.",
+    "use_when": "Exploring all pairwise relationships at once.",
+    "limitations": "Becomes unreadable beyond about six columns.",
+    "similar": [
+      "Correlation Heatmap",
+      "Parallel Coordinates Plot"
+    ],
+    "tools": [
+      "pandas",
+      "seaborn"
+    ]
+  },
+  {
+    "key": "word_frequency_bar",
+    "name": "Word Frequency Bar",
+    "aliases": [
+      "Top words"
+    ],
+    "category": "Text / Content",
+    "description": "A horizontal bar chart of the most common words in a text column, with common filler words removed.",
+    "data_required": "One free-text column.",
+    "use_when": "A more accurate alternative to a word cloud when you need to compare frequencies.",
+    "limitations": "Ignores meaning and context; 'not good' counts as 'good'.",
+    "similar": [
+      "Word Cloud",
+      "Bar Chart"
+    ],
+    "tools": [
+      "matplotlib",
+      "nltk",
+      "scikit-learn"
+    ]
+  },
+  {
+    "key": "missing_values_map",
+    "name": "Missing Values Map",
+    "aliases": [
+      "Missingness matrix"
+    ],
+    "category": "Data Quality",
+    "description": "A grid of rows by columns where missing cells are highlighted, with the percentage missing per column.",
+    "data_required": "Any table.",
+    "use_when": "Before cleaning: seeing which columns have gaps and whether gaps happen in the same rows.",
+    "limitations": "Large tables are sampled to keep the picture readable.",
+    "similar": [
+      "Heatmap (Cross-tab)"
+    ],
+    "tools": [
+      "missingno",
+      "matplotlib"
+    ]
+  }
+]

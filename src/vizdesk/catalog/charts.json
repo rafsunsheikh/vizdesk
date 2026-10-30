@@ -1,0 +1,1274 @@
+[
+  {
+    "key": "box_whisker_plot",
+    "name": "Box & Whisker Plot",
+    "aliases": [],
+    "category": "Distributions",
+    "description": "Displays data distribution through quartiles. Rectangular boxes frame central data ranges; whiskers (parallel lines) indicate spread beyond bounds. Can be oriented vertically or horizontally.",
+    "data_required": "Statistical summaries — median, mean, 25th percentile, extreme values (min/max).",
+    "use_when": "Space is limited but you need to evaluate multiple datasets simultaneously. Excels at comparing statistical distributions across numerous groups — a compact alternative to histograms or density curves.",
+    "notes": "Insights Revealed: Key statistical markers (medians, percentiles), extreme data points, symmetry/asymmetry, data clustering density, directional skewness.",
+    "variations": "Variable-width box plots, notched box plots.",
+    "similar": [
+      "Span Chart",
+      "Violin Plot"
+    ],
+    "tools": [
+      "D3.js",
+      "Plotly",
+      "Seaborn",
+      "Vega",
+      "Excel",
+      "Stata",
+      "Tableau",
+      "Flourish",
+      "RAWGraphs",
+      "PlotDB"
+    ]
+  },
+  {
+    "key": "density_plot",
+    "name": "Density Plot",
+    "aliases": [
+      "Kernel Density Plot"
+    ],
+    "category": "Distributions",
+    "description": "Visualizes distribution of data over a continuous interval using a smooth curve. Applies kernel smoothing to eliminate noise — unlike histograms, it produces a fluid curve without arbitrary bin boundaries. Elevated sections show where data points cluster most heavily.",
+    "data_required": "Continuous numerical measurements tracked across a defined timeframe or measurable range.",
+    "use_when": "Assessing distribution shapes and identifying trends. Provides a stable visual representation that consistently reveals the true data shape, regardless of how intervals are grouped. Avoids the visual distortion caused by varying bin counts in histograms.",
+    "notes": "Advantage: Unaffected by bin quantity; delivers a clearer view of the data's true shape than histograms.",
+    "similar": [
+      "Histogram"
+    ],
+    "tools": [
+      "R",
+      "D3.js",
+      "Python (Seaborn/Matplotlib)",
+      "React",
+      "ggplot2",
+      "Vega",
+      "Vega-Lite",
+      "Datylon",
+      "Everviz",
+      "Plotivy",
+      "Tableau"
+    ]
+  },
+  {
+    "key": "histogram",
+    "name": "Histogram",
+    "aliases": [],
+    "category": "Distributions",
+    "description": "Visualizes the distribution of data over a continuous interval. Each bar corresponds to the calculated frequency within specific bins/ranges.",
+    "data_required": "Continuous numerical data that can be grouped into ranges.",
+    "use_when": "Analyzing distributions and patterns. Helps viewers quickly estimate value concentrations, identify extremes, detect gaps or anomalies, and approximate probability distributions.",
+    "similar": [
+      "Bar Chart",
+      "Density Plot",
+      "Population Pyramid"
+    ],
+    "tools": [
+      "D3.js",
+      "Plotly",
+      "Python",
+      "R",
+      "Vega",
+      "Flourish",
+      "Tableau",
+      "Infogram",
+      "Microsoft Office",
+      "Apple Numbers"
+    ]
+  },
+  {
+    "key": "stem_leaf_plot",
+    "name": "Stem & Leaf Plot",
+    "aliases": [],
+    "category": "Distributions",
+    "description": "A hybrid between a table and histogram that preserves individual data values while showing distribution shape. Each data point is split into a \"stem\" (leading digit(s)) and a \"leaf\" (trailing digit).",
+    "data_required": "Numerical data with multiple digits (typically 2-4 digit numbers).",
+    "use_when": "Small datasets where you need to see both the distribution shape and the actual data values. Useful in educational settings and for quick exploratory analysis.",
+    "limitations": "Becomes unwieldy with large datasets or data with many decimal places.",
+    "similar": [
+      "Histogram",
+      "Density Plot"
+    ],
+    "tools": [
+      "Manual/paper",
+      "R (stem() function)",
+      "Python (stemgraphic library)"
+    ]
+  },
+  {
+    "key": "violin_plot",
+    "name": "Violin Plot",
+    "aliases": [],
+    "category": "Distributions",
+    "description": "A hybrid visualization merging a box plot and density plot. Shows data distribution and probability density. Visual markers: central white dot = median, thick black bar = interquartile range, thin lines = adjacent min/max values.",
+    "data_required": "Numerical datasets used to calculate median, interquartile range, adjacent min/max points, and overall probability density.",
+    "use_when": "Comparing how values distribute across categories, particularly when identifying **bimodal or multimodal** patterns that simpler charts typically hide.",
+    "limitations": "More detail than box plots, but can appear \"visually noisier.\"",
+    "similar": [
+      "Box & Whisker Plot"
+    ],
+    "tools": [
+      "D3.js",
+      "Highcharts",
+      "Python/seaborn",
+      "R/ggplot2",
+      "Vega",
+      "Flourish",
+      "Plotly",
+      "Plotivy"
+    ]
+  },
+  {
+    "key": "bar_chart",
+    "name": "Bar Chart",
+    "aliases": [
+      "Bar graph",
+      "column graph."
+    ],
+    "category": "Comparisons",
+    "description": "Uses horizontal or vertical bars to display discrete numerical comparisons across categories. Answers the question \"how many?\" in each category.",
+    "data_required": "Discrete, numerical data organized by specific categories. Must be categorical (not continuous).",
+    "use_when": "Comparing values across distinct groups. Identify patterns across categories.",
+    "limitations": "Showing trends over continuous intervals.",
+    "variations": "Multi-set, Population Pyramid, Radial, Stacked formats.",
+    "tools": [
+      "D3.js",
+      "Plotly",
+      "Highcharts",
+      "Datawrapper",
+      "Flourish",
+      "Excel",
+      "Tableau"
+    ]
+  },
+  {
+    "key": "bullet_graph",
+    "name": "Bullet Graph",
+    "aliases": [],
+    "category": "Comparisons",
+    "description": "Performance-focused visualization that expands on the standard bar chart by adding contextual markers. Designed by Stephen Few to replace cluttered dashboard meters.",
+    "data_required": "Primary metric (\"Feature Measure\"), target threshold (\"Comparative Measure\"), and qualitative performance bands (e.g., poor/average/great).",
+    "use_when": "Tracking goal progress, comparing values, displaying range data efficiently. Optimized for dashboard use.",
+    "best_practice": "Limit qualitative bands to five maximum.",
+    "similar": [
+      "Standard Bar Chart"
+    ],
+    "tools": [
+      "D3.js",
+      "Vega-Lite",
+      "Plotly",
+      "Datawrapper",
+      "Flourish",
+      "Tableau"
+    ]
+  },
+  {
+    "key": "marimekko_chart",
+    "name": "Marimekko Chart",
+    "aliases": [
+      "Mosaic Plot"
+    ],
+    "category": "Comparisons",
+    "description": "Maps categorical data across two variables. Percentage scales on both axes control segment dimensions — operates like a dual-axis 100% Stacked Bar Graph. Highlights connections between primary categories and their subdivisions.",
+    "data_required": "Categorical information organized around two variables, where both axes represent variables measured on a percentage scale.",
+    "use_when": "Broad overviews of category relationships across two dimensions. Supports comparisons, part-to-whole breakdowns, proportions, and relational trends.",
+    "limitations": "Interpretation grows difficult as segment count increases. Blocks lack a unified baseline — better for general insights than precise measurements.",
+    "similar": [
+      "Stacked Bar Graph",
+      "Treemap"
+    ],
+    "tools": [
+      "AnyChart",
+      "FusionCharts",
+      "JSCharting",
+      "D3.js",
+      "Vega-Lite",
+      "plotDB",
+      "Plotivy",
+      "Tableau"
+    ]
+  },
+  {
+    "key": "multi_set_bar_chart",
+    "name": "Multi-set Bar Chart",
+    "aliases": [
+      "Grouped",
+      "Clustered Bar Chart"
+    ],
+    "category": "Comparisons",
+    "description": "Arranges multiple data series on a shared axis under broader parent categories. Bar length represents discrete numerical values. Each series gets a distinct color; bars in the same group are placed together and spaced from other groupings.",
+    "data_required": "Parent categories containing identical subcategories. Handles comparisons of shared sub-variables, contrasts mini-histograms, or tracks metrics across time intervals.",
+    "use_when": "Comparing categories sharing the same sub-variables, visualizing time-based trends, or contrasting frequency distributions.",
+    "best_practice": "Limit the number of bars within each cluster for clarity.",
+    "notes": "Analytical Functions: Comparisons, distribution tracking, pattern identification, relationship analysis.",
+    "similar": [
+      "Standard Bar Chart",
+      "Histogram",
+      "Stacked Bar Graph"
+    ],
+    "tools": [
+      "Various programming libraries",
+      "web platforms",
+      "desktop applications"
+    ]
+  },
+  {
+    "key": "pictogram_chart",
+    "name": "Pictogram Chart",
+    "aliases": [],
+    "category": "Comparisons",
+    "description": "Uses repeated icons or images to represent data values. Each icon stands for a specific quantity.",
+    "data_required": "Numerical data that divides evenly by the icon value, or requires partial-icon rendering.",
+    "use_when": "Presenting data to general audiences, simplifying complex statistics, adding visual appeal to reports.",
+    "limitations": "Difficult to represent partial values accurately. Not suitable for precise quantitative analysis.",
+    "similar": [
+      "Dot Matrix Chart"
+    ],
+    "tools": [
+      "Various design tools",
+      "web generators"
+    ]
+  },
+  {
+    "key": "radar_chart",
+    "name": "Radar Chart",
+    "aliases": [
+      "Spider",
+      "Web",
+      "Polar",
+      "Star Chart"
+    ],
+    "category": "Comparisons",
+    "description": "Maps multiple quantitative metrics by assigning each a radial axis from a central origin. Axes share uniform spacing and scale. Data points are linked to create a polygon with reference grid lines.",
+    "data_required": "Multiple quantitative variables or performance metrics for each category/subject.",
+    "use_when": "Identifying similar values or outliers, tracking performance levels, analyzing comparisons, patterns, and relationships across multiple dimensions.",
+    "limitations": "Multiple polygons become hard to read and cluttered (especially when filled). Too many variables complicate readability. Not as good for comparing values across each variable as linear layouts.",
+    "best_practice": "Use transparency to reduce overlap; keep layout simple.",
+    "tools": [
+      "amCharts",
+      "Chart.js",
+      "Highcharts",
+      "D3.js",
+      "Plotly",
+      "Vega",
+      "Flourish",
+      "Tableau"
+    ]
+  },
+  {
+    "key": "radial_bar_chart",
+    "name": "Radial Bar Chart",
+    "aliases": [],
+    "category": "Comparisons",
+    "description": "Maps a standard bar chart onto polar coordinates. Bars grow outward from the center along concentric rings.",
+    "data_required": "Categorical data paired with numerical values suitable for comparison.",
+    "use_when": "**Only for decorative/aesthetic purposes.** The chart is misleading for data comparison because bar lengths at larger radii visually expand compared to identical values at smaller radii.",
+    "limitations": "Straight-line bar charts are far more accurate for interpretation.",
+    "similar": [
+      "Standard Bar Chart",
+      "Radial Column Chart"
+    ],
+    "tools": [
+      "amCharts",
+      "AnyChart",
+      "Apache ECharts",
+      "JSCharting",
+      "Everviz",
+      "Infogram",
+      "Vizzlo"
+    ]
+  },
+  {
+    "key": "radial_column_chart",
+    "name": "Radial Column Chart",
+    "aliases": [
+      "Star Graph"
+    ],
+    "category": "Comparisons",
+    "description": "Maps bars onto a polar grid. Concentric rings indicate magnitude; lines radiating from the core denote distinct groups. Bars grow outward from the middle, scaling with each ring. Negatives: zero positioned at any ring, inner rings = negative magnitudes.",
+    "data_required": "Category labels for radial divisions and numerical values for bar lengths.",
+    "use_when": "Comparisons in a circular layout.",
+    "similar": [
+      "Bar Chart",
+      "Radial Bar Chart"
+    ],
+    "tools": [
+      "amCharts",
+      "Bokeh",
+      "D3.js",
+      "jChartFX",
+      "matplotlib",
+      "Flourish",
+      "Plotivy"
+    ]
+  },
+  {
+    "key": "tally_chart",
+    "name": "Tally Chart",
+    "aliases": [],
+    "category": "Comparisons",
+    "description": "Records and displays data frequency using tally marks. Categories/values/intervals placed in one axis/column, with a mark added per occurrence. Tallies are summed into a total column.",
+    "data_required": "Simple frequency data — how often specific categories, numerical values, or defined intervals occur.",
+    "use_when": "Making direct comparisons or analyzing how data is distributed across groups.",
+    "notes": "Construction: Two-step process: mark occurrences per category, then calculate totals.",
+    "similar": [
+      "Histogram"
+    ],
+    "tools": [
+      "Paper and pen",
+      "Plotivy"
+    ]
+  },
+  {
+    "key": "bubble_chart",
+    "name": "Bubble Chart",
+    "aliases": [],
+    "category": "Relationships / Correlations",
+    "description": "A cross between a Scatterplot and a Proportional Area Chart. Maps two metrics on standard axes while circle size represents a third value. Colors can denote categories or a fourth metric; time can be mapped or animated.",
+    "data_required": "At least 3 numerical variables for positioning and sizing. Categorical labels for grouping. Optional 4th variable for color coding, plus temporal data.",
+    "use_when": "Comparisons, tracking data over time, showing distributions, identifying patterns, displaying proportions, revealing relationships between categorized circles.",
+    "best_practice": "Circle sizes must be drawn based on **area**, not radius or diameter, to prevent visual distortion.",
+    "limitations": "Large datasets quickly become cluttered. Interactive features (hover tooltips, filtering) help manage complexity.",
+    "similar": [
+      "Scatterplot",
+      "Proportional Area Chart"
+    ],
+    "tools": [
+      "AmCharts",
+      "Chart.js",
+      "ggplot2",
+      "Flourish",
+      "Excel",
+      "Tableau",
+      "D3.js",
+      "Plotly"
+    ]
+  },
+  {
+    "key": "parallel_coordinates_plot",
+    "name": "Parallel Coordinates Plot",
+    "aliases": [],
+    "category": "Relationships / Correlations",
+    "description": "Displays multivariate data using parallel vertical axes. Each line represents a data point, crossing each axis at the value for that variable. Makes it possible to see clusters and outliers.",
+    "data_required": "Multiple numerical variables for each data point. Tabular data where each row is an observation and each column is a variable.",
+    "use_when": "Comparing multiple variables across many data points, identifying patterns and clusters in high-dimensional data, spotting outliers.",
+    "limitations": "Can become cluttered with too many lines. Axes must be scaled similarly for fair comparison.",
+    "similar": [
+      "Parallel Sets",
+      "Radar Chart"
+    ],
+    "tools": [
+      "R (ggplot2",
+      "parallel)",
+      "Python (pandas",
+      "matplotlib)",
+      "D3.js"
+    ]
+  },
+  {
+    "key": "scatterplot",
+    "name": "Scatterplot",
+    "aliases": [],
+    "category": "Relationships / Correlations",
+    "description": "Plots numerical pairs across a coordinate system (X-Y plot). Shows how two variables relate to each other.",
+    "data_required": "Paired numerical data representing two distinct variables.",
+    "use_when": "Analyzing whether changes in one metric correspond to changes in another — \"to see if one variable impacts the other.\"",
+    "notes": "Analytical Features: Correlation Types: Positive, negative, or null patterns Shape & Strength: Linear, exponential, or U-shaped curves; point density indicates strength Outliers: Points far from the main group Trend Analysis: \"Line of Best Fit\" overlays for interpolation estimates",
+    "best_practice": "\"Correlation is not causation\" — hidden variables may skew results.",
+    "similar": [
+      "Bubble Chart"
+    ],
+    "tools": [
+      "D3.js",
+      "Chart.js",
+      "matplotlib",
+      "ggplot2",
+      "Python",
+      "R",
+      "Excel",
+      "Tableau"
+    ]
+  },
+  {
+    "key": "span_chart",
+    "name": "Span Chart",
+    "aliases": [
+      "Range Bar",
+      "Floating Bar",
+      "High-Low",
+      "Difference Graph"
+    ],
+    "category": "Relationships / Correlations",
+    "description": "Shows dataset ranges between a minimum and maximum value. Focuses on the range rather than individual points.",
+    "data_required": "Paired min/max values for each category. No intermediate data points required.",
+    "use_when": "Comparing ranges between categories (e.g., temperature ranges, budget ranges, score ranges).",
+    "limitations": "Focuses only on extreme values — gives no information on data points between min and max (averages, distribution).",
+    "similar": [
+      "Box & Whisker Plot",
+      "Candlestick Chart",
+      "Gantt Chart"
+    ],
+    "tools": [
+      "AnyChart",
+      "D3.js",
+      "JSCharting",
+      "Vega-Lite",
+      "ZingChart",
+      "Plotivy",
+      "Tableau"
+    ]
+  },
+  {
+    "key": "pie_chart",
+    "name": "Pie Chart",
+    "aliases": [],
+    "category": "Compositions / Part-to-Whole",
+    "description": "Splits a circle into proportional slices. Each slice's arc length indicates a category's share; the entire circle = 100%.",
+    "data_required": "Categorical data where all values sum to a single total (100%). Best with a limited number of categories.",
+    "use_when": "Delivering a rapid overview of proportional distribution or comparing a single category against the total.",
+    "limitations": "Slices become unreadable as category count increases Occupies more space than 100% stacked bar charts; typically requires a legend Accurate comparisons across multiple pie charts are challenging — humans are bad at judging area differences",
+    "similar": [
+      "Donut Chart",
+      "Nightingale Rose Chart",
+      "Sunburst Diagram"
+    ],
+    "tools": [
+      "D3.js",
+      "Chart.js",
+      "Highcharts",
+      "R",
+      "Python",
+      "Excel",
+      "Tableau",
+      "Flourish"
+    ]
+  },
+  {
+    "key": "donut_chart",
+    "name": "Donut Chart",
+    "aliases": [],
+    "category": "Compositions / Part-to-Whole",
+    "description": "A Pie Chart with the center area cut out. Shifts attention from slice area to **arc length**, helping viewers track overall value changes. The empty middle allows additional information to be placed inside.",
+    "data_required": "Categorical data representing distinct segments of a total, suitable for measuring proportions.",
+    "use_when": "Comparisons, part-to-a-whole relationships, proportions.",
+    "similar": [
+      "Pie Chart",
+      "Sunburst Diagram"
+    ],
+    "tools": [
+      "D3.js",
+      "Chart.js",
+      "Plotly",
+      "Vega",
+      "Datawrapper",
+      "Flourish",
+      "Tableau",
+      "Microsoft Office"
+    ]
+  },
+  {
+    "key": "stacked_bar_graph",
+    "name": "Stacked Bar Graph",
+    "aliases": [],
+    "category": "Compositions / Part-to-Whole",
+    "description": "Layers segments vertically within bars. Shows how a larger category divides into subcategories alongside each component's share of the aggregate. Simple formats stack values sequentially; percentage-based layouts display proportional shares.",
+    "data_required": "Categorical groupings containing multiple subcategories, paired with numerical values for individual segments and combined sums.",
+    "use_when": "Comparisons and proportions. Simple layouts excel for \"total amounts across each segmented bar.\" The 100% variant suits part-to-a-whole analysis.",
+    "limitations": "Clarity drops with numerous divisions. Cross-segment evaluation suffers because bars aren't aligned on a common baseline.",
+    "similar": [
+      "Bar Chart",
+      "Marimekko Chart"
+    ],
+    "tools": [
+      "D3.js",
+      "Chart.js",
+      "Highcharts",
+      "R",
+      "Python",
+      "Excel",
+      "Tableau",
+      "Flourish"
+    ]
+  },
+  {
+    "key": "treemap",
+    "name": "Treemap",
+    "aliases": [],
+    "category": "Compositions / Part-to-Whole",
+    "description": "Displays hierarchical data using nested rectangles. Each shape's size reflects a numerical value. Layouts use tiling algorithms (commonly \"squarified\") prioritizing near-square shapes. Originally designed by Ben Shneiderman for file directory visualization.",
+    "data_required": "Hierarchical/category data (parent-child relationships) + numerical values for part-to-whole comparisons (required for accurate sizing; if omitted, space splits equally among siblings).",
+    "use_when": "Space is limited and you need a quick overview of how categories relate proportionally. Best for comparisons, hierarchy mapping, part-to-a-whole relationships, and proportions.",
+    "notes": "Strengths: Highly compact, screen-space efficient, effective for proportional relationships.",
+    "limitations": "Doesn't show hierarchical levels as clearly as tree or sunburst diagrams.",
+    "similar": [
+      "Circle Packing",
+      "Marimekko Chart",
+      "Sunburst Diagram"
+    ],
+    "tools": [
+      "D3.js",
+      "Plotly",
+      "ECharts",
+      "amCharts",
+      "AnyChart",
+      "Vega",
+      "Flourish",
+      "RAWGraphs",
+      "Infogram",
+      "Tableau",
+      "Microsoft Office"
+    ]
+  },
+  {
+    "key": "area_graph",
+    "name": "Area Graph",
+    "aliases": [],
+    "category": "Data Over Time / Trends",
+    "description": "A line graph variant where the space beneath the line is filled with color or texture. Created by plotting coordinates, connecting them, and shading the resulting shape.",
+    "data_required": "Numerical measurements tracked across a timeline or continuous interval.",
+    "use_when": "Displaying the development of quantitative values over an interval or time period. Ideal for highlighting general trajectories rather than reporting precise figures.",
+    "variations": "Grouped (shared baseline) and Stacked (each series builds on the previous endpoint).",
+    "similar": [
+      "Line Graph",
+      "Stacked Area Graph",
+      "Stream Graph"
+    ],
+    "tools": [
+      "D3.js",
+      "Chart.js",
+      "Highcharts",
+      "Plotly",
+      "Excel",
+      "Tableau",
+      "Flourish"
+    ]
+  },
+  {
+    "key": "calendar",
+    "name": "Calendar",
+    "aliases": [],
+    "category": "Data Over Time / Trends",
+    "description": "Displays periods of time and organizes events using monthly grids with 7 columns for weekdays and 5-6 rows. Must clearly show a chronological sequence of dates or time units.",
+    "data_required": "Date-specific data to track events or periods across days, weeks, months, and years.",
+    "use_when": "Visualizing data over time and serving as a reference tool.",
+    "similar": [
+      "Timetable"
+    ],
+    "tools": [
+      "AnyChart",
+      "Google Charts",
+      "JSCharting",
+      "Vega",
+      "ZingChart",
+      "Canva",
+      "Google Docs",
+      "Plotivy",
+      "RAWGraphs",
+      "Excel"
+    ]
+  },
+  {
+    "key": "gantt_chart",
+    "name": "Gantt Chart",
+    "aliases": [],
+    "category": "Data Over Time / Trends",
+    "description": "Project management tool that visualizes task schedules across a timeline. Displays activities with their duration over time. Grid layout: rows = activities, columns = timescale.",
+    "data_required": "Task names, start/end dates, duration values, completion percentages, categorical groupings, dependency mappings, milestone markers, current date reference.",
+    "use_when": "Scheduling, tracking parallel workflows, managing task dependencies. Best for data over time, processes & methods, ranges, and reference tools.",
+    "notes": "Visual Elements: Horizontal bars for task durations (color-coded by category, partially shaded for progress). Connecting arrows for dependencies, highlighted arrows for critical paths, milestone symbols, vertical line for present date.",
+    "similar": [
+      "Timeline",
+      "Stream Graph"
+    ],
+    "tools": [
+      "Asana",
+      "ClickUp",
+      "Smartsheet",
+      "Flourish",
+      "Excel",
+      "Tableau",
+      "amCharts",
+      "DHTMLX",
+      "Google Charts",
+      "Vega-Lite",
+      "Plotly"
+    ]
+  },
+  {
+    "key": "line_graph",
+    "name": "Line Graph",
+    "aliases": [],
+    "category": "Data Over Time / Trends",
+    "description": "Maps quantitative values across continuous intervals or time periods. Points plotted on a grid and connected by lines. Upward slopes = growth, downward = decline. The path reveals underlying dataset patterns.",
+    "data_required": "Quantitative metrics paired with a timescale or sequential intervals. Supports negative values beneath the horizontal axis.",
+    "use_when": "Tracking temporal changes and comparing multiple datasets. **Best chart for showing trends.**",
+    "best_practice": "Avoid using more than 3-4 lines per graph to maintain readability. For additional series, split into smaller separate charts (small multiples).",
+    "similar": [
+      "Area Graph",
+      "Stacked Area Graph",
+      "Stream Graph"
+    ],
+    "tools": [
+      "D3.js",
+      "Chart.js",
+      "matplotlib",
+      "ggplot2",
+      "Datawrapper",
+      "Flourish",
+      "RAWGraphs",
+      "Google Docs",
+      "Tableau",
+      "Microsoft Office"
+    ]
+  },
+  {
+    "key": "spiral_plot",
+    "name": "Spiral Plot",
+    "aliases": [],
+    "category": "Data Over Time / Trends",
+    "description": "Plots time-based data along an Archimedean spiral originating at the center and expanding outward. Can render bars, lines, or points along the curved path. Also called a \"Time Series Spiral.\"",
+    "data_required": "Time-series datasets, particularly large volumes of records spanning extended durations.",
+    "use_when": "Showing large datasets to highlight long-term trends and recurring cycles. Assigning distinct colors to each cycle improves visual segmentation.",
+    "similar": [
+      "Line Graph",
+      "Stacked Area Graph"
+    ],
+    "tools": [
+      "D3.js (Arpit Narechania)",
+      "R/ggplot2 (coord_polar)"
+    ]
+  },
+  {
+    "key": "stacked_area_graph",
+    "name": "Stacked Area Graph",
+    "aliases": [],
+    "category": "Data Over Time / Trends",
+    "description": "Each data point is built on top of the previous series, layering multiple sets. The entire graph represents the total of all data plotted. Relies on filled areas to communicate magnitude.",
+    "data_required": "Multiple continuous datasets tracking whole numbers across a sequential progression (typically chronological). **Cannot display negative values.**",
+    "use_when": "Comparing multiple variables changing over time while tracking cumulative totals.",
+    "notes": "Functions: Comparisons, data over time, pattern recognition.",
+    "similar": [
+      "Area Graph",
+      "Line Graph",
+      "Stream Graph"
+    ],
+    "tools": [
+      "D3.js",
+      "Chart.js",
+      "Highcharts",
+      "R/ggplot2",
+      "Python/Plotly",
+      "Datawrapper",
+      "Flourish",
+      "Tableau"
+    ]
+  },
+  {
+    "key": "stream_graph",
+    "name": "Stream Graph",
+    "aliases": [],
+    "category": "Data Over Time / Trends",
+    "description": "A modified stacked area plot shifted to fluctuate around a center line rather than a flat baseline. Uses fluid, organic bands to show how categories evolve. Band width = value magnitude; horizontal axis = time.",
+    "data_required": "High-volume datasets tracking multiple distinct categories across a continuous timeline, with values that rise and fall.",
+    "use_when": "Spotting broad trends, seasonal cycles, or volatility across numerous groups. Recommended for interactive displays and high-level overview audiences.",
+    "limitations": "Legibility issues with dense datasets. Smaller categories get visually overwhelmed by larger ones. Missing value axis makes reading exact figures impossible.",
+    "notes": "Example: New York Times — \"Box Office Receipts 1986-2008.\"",
+    "similar": [
+      "Stacked Area Graph"
+    ],
+    "tools": [
+      "Apache ECharts",
+      "NVD3.js",
+      "Vega-Lite",
+      "R packages",
+      "Flourish",
+      "RAWGraphs",
+      "Infogram",
+      "Datylon"
+    ]
+  },
+  {
+    "key": "timeline",
+    "name": "Timeline",
+    "aliases": [],
+    "category": "Data Over Time / Trends",
+    "description": "A graphical way of displaying a list of events in chronological order. Some versions use proportional scales; others simply show sequence. Communicates time-related information for analysis or visual storytelling.",
+    "data_required": "A sequence of events tied to specific dates or durations. Scaled versions need precise time intervals. Quantitative metrics may be added to show changes alongside the chronological layout.",
+    "use_when": "Tracking data over time, distribution, or patterns. Analyzing historical sequences, spotting recurring trends, illustrating how measured values evolve chronologically.",
+    "similar": [
+      "Gantt Chart",
+      "Timetable"
+    ],
+    "tools": [
+      "AnyChart",
+      "Google Charts",
+      "KronoGraph",
+      "Vega",
+      "Creately",
+      "Flourish",
+      "Plotivy",
+      "Tiki-Toki",
+      "Venngage",
+      "Vizzlo",
+      "yEd live",
+      "Adobe Illustrator"
+    ]
+  },
+  {
+    "key": "bubble_map",
+    "name": "Bubble Map",
+    "aliases": [],
+    "category": "Geospatial / Location",
+    "description": "Circles placed on a map, with the area of each circle proportional to its value.",
+    "data_required": "Geographic coordinates and proportional numerical values for each location.",
+    "use_when": "Comparing regional values **without the size-bias inherent in choropleth maps**.",
+    "limitations": "Oversized markers can overlap other data points or map features — requires careful sizing adjustments.",
+    "similar": [
+      "Dot Map",
+      "Proportional Area Chart"
+    ],
+    "tools": [
+      "amCharts",
+      "AnyChart",
+      "Google Charts",
+      "Plotly",
+      "Polymaps",
+      "Tableau",
+      "CARTO",
+      "Columns.ai",
+      "Datawrapper",
+      "Flourish"
+    ]
+  },
+  {
+    "key": "choropleth_map",
+    "name": "Choropleth Map",
+    "aliases": [],
+    "category": "Geospatial / Location",
+    "description": "Geographic territories are shaded or patterned to reflect a specific metric. Helps visualize values over a geographical area, showing variation or patterns across the displayed location. Color scales shift from light to dark or blend hues.",
+    "data_required": "Spatial boundary data paired with a corresponding numerical variable. **Values must be normalized** (e.g., density per square kilometer) rather than raw counts to prevent misleading visual emphasis on larger zones.",
+    "use_when": "Analyzing location-based trends, comparing metrics across regions, identifying spatial patterns.",
+    "limitations": "Color progressions make precise numerical comparisons difficult. Larger regions naturally draw more attention. **Always normalize data** to avoid misleading density representations.",
+    "notes": "Common Error: Encoding raw data values instead of normalized values produces a misleading map (not a true density map).",
+    "similar": [
+      "Bubble Map",
+      "Connection Map",
+      "Flow Map"
+    ],
+    "tools": [
+      "D3.js",
+      "Plotly",
+      "R",
+      "Python",
+      "Datawrapper",
+      "Flourish",
+      "Tableau",
+      "ArcGIS"
+    ]
+  },
+  {
+    "key": "connection_map",
+    "name": "Connection Map",
+    "aliases": [],
+    "category": "Geospatial / Location",
+    "description": "Also known as a Link Map or Ray Map. Points placed on a map are connected by straight or curved lines.",
+    "data_required": "Geographically plotted points along with link or route data that connects them.",
+    "use_when": "Showing connections and relationships geographically, tracking specific pathways. Highlights spatial patterns through the distribution of connections and shows where links are most dense.",
+    "notes": "Functions: Distribution, location, movement, patterns, relationships. Example: Busiest Routes From Heathrow Airport (2014).",
+    "similar": [
+      "Flow Map"
+    ],
+    "tools": [
+      "amCharts",
+      "AnyChart",
+      "D3.js",
+      "JSCharting",
+      "Python/R Graph Galleries",
+      "yFiles",
+      "Zoomcharts",
+      "Flourish",
+      "FlowmapBlue",
+      "Plotivy"
+    ]
+  },
+  {
+    "key": "dot_map",
+    "name": "Dot Map",
+    "aliases": [
+      "Point Map",
+      "Dot Density Map"
+    ],
+    "category": "Geospatial / Location",
+    "description": "Uses uniformly sized markers across a geographic area to visualize spatial data. Easy to grasp and better for overview of data, but not great for retrieving exact values.",
+    "data_required": "Geographic boundaries or coordinates paired with numerical counts or scaled units.",
+    "use_when": "Analyzing distribution, pinpointing locations, identifying spatial patterns.",
+    "variations": "Single-count format: Each dot = one individual item Scaled format: Each dot = a defined quantity (e.g., 10 trees per dot)",
+    "similar": [
+      "Bubble Map"
+    ],
+    "tools": [
+      "D3.js",
+      "Plotly",
+      "Vega-Lite",
+      "AnyChart",
+      "Flourish",
+      "Datawrapper",
+      "CARTO",
+      "Plotivy",
+      "Tableau"
+    ]
+  },
+  {
+    "key": "flow_map",
+    "name": "Flow Map",
+    "aliases": [],
+    "category": "Geospatial / Location",
+    "description": "Geographically shows the movement of information or objects from one location to another. Line thickness represents volume or magnitude.",
+    "data_required": "Origin and destination coordinates, directional indicators, and quantitative values for flow volume.",
+    "use_when": "Analyzing distribution, location, and movement & flow patterns.",
+    "best_practice": "Lines branch from origins. Use arrows for directional/incoming/outgoing data, or omit for bidirectional trade. Bundle overlapping lines; avoid crossings to minimize visual clutter.",
+    "notes": "Examples: Historical migration routes, trade routes.",
+    "similar": [
+      "Connection Map",
+      "Sankey Diagram"
+    ],
+    "tools": [
+      "AnyChart (JS)",
+      "FlowmapBlue",
+      "Plotivy"
+    ]
+  },
+  {
+    "key": "arc_diagram",
+    "name": "Arc Diagram",
+    "aliases": [],
+    "category": "Networks / Hierarchies",
+    "description": "Maps network data onto a single axis. Nodes positioned linearly, linked with curved lines.",
+    "data_required": "Paired node data representing connections, plus optional metrics for link thickness (interaction frequency or co-occurrence).",
+    "use_when": "Identifying co-occurrences and relationship patterns within datasets.",
+    "limitations": "Lacks structural clarity of traditional 2D network charts. High link density creates visual clutter.",
+    "notes": "Categories: Patterns and Relationships.",
+    "similar": [
+      "Network Diagram"
+    ],
+    "tools": [
+      "Data to Viz (R)",
+      "Highcharts",
+      "Protovis",
+      "D3.js",
+      "Plotivy",
+      "RAWGraphs"
+    ]
+  },
+  {
+    "key": "chord_diagram",
+    "name": "Chord Diagram",
+    "aliases": [],
+    "category": "Networks / Hierarchies",
+    "description": "Maps relationships between entities arranged around a circle. Links use curved ribbons; widths scaled to match numerical weights. Color coding separates distinct categories.",
+    "data_required": "Entity names for circular markers, paired connection data, numerical values for link strength, categorical labels for coloring.",
+    "use_when": "Comparing similarities within a dataset or between different groups. Tracking comparisons and relationships.",
+    "limitations": "Over-cluttering with too many connections.",
+    "similar": [
+      "Non-Ribbon Chord Diagram",
+      "Network Diagram"
+    ],
+    "tools": [
+      "D3.js",
+      "amCharts",
+      "plotly (Python)",
+      "circlize (R)",
+      "Flourish",
+      "Circos",
+      "ArcGIS Insights"
+    ]
+  },
+  {
+    "key": "circle_packing",
+    "name": "Circle Packing",
+    "aliases": [],
+    "category": "Networks / Hierarchies",
+    "description": "Also known as a \"Circular Treemap.\" Replaces rectangles with circles to map nested data. Parent nodes enclose sub-branches; circle area reflects a metric (quantity, file size); color denotes categories or additional variables.",
+    "data_required": "Hierarchical/tree data, proportional numerical values for node sizing, optional categorical/continuous data for color mapping.",
+    "use_when": "Clarifying nested relationships — \"reveals hierarchical structure better than a Treemap.\"",
+    "limitations": "Sacrifices pixel efficiency due to empty space within circles.",
+    "similar": [
+      "Treemap",
+      "Sunburst Diagram"
+    ],
+    "tools": [
+      "D3.js",
+      "Vega",
+      "R/ggraph",
+      "matplotlib",
+      "Flourish",
+      "RAWGraphs",
+      "Plotivy"
+    ]
+  },
+  {
+    "key": "network_diagram",
+    "name": "Network Diagram",
+    "aliases": [
+      "Network Graph",
+      "Node-Link Diagram"
+    ],
+    "category": "Networks / Hierarchies",
+    "description": "Shows how things are interconnected using nodes (circles/icons) and connecting lines (links). Additional metrics can adjust node dimensions or link thickness. Maps connected systems to interpret structural patterns like clustering and connection density.",
+    "data_required": "Entities (nodes), connection data (links), optional numerical values for node sizes or link weights.",
+    "use_when": "Analyzing relationship structures, identifying natural clusters, measuring how densely a group connects.",
+    "variations": "Undirected (only connections) vs. Directed (arrows for one/two-way flow).",
+    "limitations": "Becomes hard to read with too many nodes — limited data capacity.",
+    "similar": [
+      "Arc Diagram",
+      "Brainstorm",
+      "Chord Diagram",
+      "Connection Map",
+      "Tree Diagram"
+    ],
+    "tools": [
+      "D3.js",
+      "Apache ECharts",
+      "Plotly",
+      "Vega",
+      "graph-tool",
+      "Sigma.js",
+      "Gephi",
+      "Cytoscape",
+      "Flourish",
+      "Cosmograph",
+      "yEd live"
+    ]
+  },
+  {
+    "key": "sunburst_diagram",
+    "name": "Sunburst Diagram",
+    "aliases": [
+      "Sunburst Chart",
+      "Ring Chart",
+      "Multi-level Pie Chart",
+      "Radial Treemap"
+    ],
+    "category": "Networks / Hierarchies",
+    "description": "Displays hierarchical data using concentric rings divided into slices. Center = root node; levels expand outward. Slices sized equally or proportionally to a value; colors emphasize categories.",
+    "data_required": "Hierarchical datasets with multiple parent-child levels. Optional numerical values to scale slice angles proportionally.",
+    "use_when": "Illustrating hierarchy and part-to-a-whole relationships within complex datasets.",
+    "similar": [
+      "Donut Chart",
+      "Pie Chart",
+      "Treemap"
+    ],
+    "tools": [
+      "amCharts",
+      "AnyChart",
+      "Apache ECharts",
+      "FusionCharts",
+      "D3.js",
+      "Plotly",
+      "Vega",
+      "Flourish",
+      "RAWGraph",
+      "Microsoft Office"
+    ]
+  },
+  {
+    "key": "tree_diagram",
+    "name": "Tree Diagram",
+    "aliases": [
+      "Organizational Chart",
+      "Linkage Tree"
+    ],
+    "category": "Networks / Hierarchies",
+    "description": "Maps hierarchical structures by layering segments vertically (not adjacently). Shows how a larger category divides into smaller subcategories alongside each component's share.",
+    "data_required": "Information structured to show parent-child relationships, classifications, or lineage.",
+    "use_when": "Tracking family descent, biological taxonomy, evolutionary origins, computer science/mathematical structures, corporate management hierarchies.",
+    "notes": "Key Components: Root node (top element without superior), Nodes & Branches (connected elements with relationship lines), Leaf nodes (terminal elements without children).",
+    "variations": "Dendrogram, Radial Tree Diagram.",
+    "similar": [
+      "Network Diagram",
+      "Circle Packing"
+    ],
+    "tools": [
+      "Apache ECharts",
+      "Google Chart",
+      "JSCharting",
+      "yFiles",
+      "ZingChart",
+      "ZoomCharts",
+      "Creately",
+      "Gliffy",
+      "Google Docs",
+      "Vizzlo",
+      "yEd Live"
+    ]
+  },
+  {
+    "key": "flow_chart",
+    "name": "Flow Chart",
+    "aliases": [],
+    "category": "Flows / Processes",
+    "description": "Maps sequential steps using connected shapes. Shows the sequential steps of a process. Clarifies how complex procedures, systems, or algorithms function.",
+    "use_when": "Planning, improving, or communicating workflows. Requires details about action sequences, decision points, and procedural flow (not numerical datasets).",
+    "notes": "Structure & Symbols: Curved rectangles = start/end, Lines/arrows = movement direction, Rectangles = simple instructions, Diamonds = decision moments. Labels inside each shape. Orientation: Horizontal or vertical.",
+    "similar": [
+      "Sankey Diagram"
+    ],
+    "tools": [
+      "draw.io",
+      "Lucidchart",
+      "Visio",
+      "GoJS"
+    ]
+  },
+  {
+    "key": "parallel_sets",
+    "name": "Parallel Sets",
+    "aliases": [],
+    "category": "Flows / Processes",
+    "description": "Maps categorical data across multiple dimensions using colored bands to represent flow and proportions. Similar to Sankey Diagrams but omits directional arrows and splits paths at each dimension line. Band widths reflect category proportions; colors enable cross-category distribution comparisons.",
+    "data_required": "Multi-dimensional categorical data with corresponding values or proportional weights for each category combination across displayed dimensions.",
+    "use_when": "Tracking flow, proportions, and distributions across sequential or related categorical dimensions.",
+    "notes": "Academic Foundation: Robert Kosara's 2006 and 2010 publications on interactive categorical data exploration. Example: Energy flow mapping.",
+    "similar": [
+      "Sankey Diagram",
+      "Parallel Coordinates Plot"
+    ],
+    "tools": [
+      "amCharts",
+      "AnyChart",
+      "ECharts",
+      "D3.js",
+      "Plotly",
+      "Flourish",
+      "plotDB",
+      "SankeyMATIC",
+      "EagerEyes"
+    ]
+  },
+  {
+    "key": "sankey_diagram",
+    "name": "Sankey Diagram",
+    "aliases": [],
+    "category": "Flows / Processes",
+    "description": "Visualizes proportional flows and quantities. Line thickness represents magnitude; paths can merge or split across stages. Color differentiates categories or tracks state changes.",
+    "use_when": "Tracking resource transfers or sequential workflows. Represents the transfer of energy, money, materials, or flow of any isolated system or process.",
+    "data_required": "Flow metrics, quantity values, sequential stages, categorical/state-transition labels.",
+    "notes": "Clarification: Frequently mistaken for Parallel Sets and Alluvial Diagrams, though they are distinct.",
+    "similar": [
+      "Flow Maps",
+      "Parallel Sets"
+    ],
+    "tools": [
+      "D3.js",
+      "Plotly",
+      "Matplotlib",
+      "R",
+      "ECharts",
+      "FusionCharts",
+      "Google Charts",
+      "Flourish",
+      "RAWGraphs",
+      "SankeyMATIC",
+      "Plotivy",
+      "e!Sankey",
+      "SDraw",
+      "Vizzlo"
+    ]
+  },
+  {
+    "key": "word_cloud",
+    "name": "Word Cloud",
+    "aliases": [
+      "Tag Cloud"
+    ],
+    "category": "Text / Content",
+    "description": "Scales text size to match occurrence rates, arranging terms in clusters or custom layouts. Color typically serves decorative or categorical roles.",
+    "data_required": "Source text corpus to calculate frequency, plus optional attached metrics like population figures or keyword tags.",
+    "use_when": "Blog keyword displays, comparing separate text collections, decorative web designs.",
+    "limitations": "Long words are emphasized over short words. Not great for analytical accuracy — used more for aesthetic reasons.",
+    "similar": [
+      "Dot Matrix Chart"
+    ],
+    "tools": [
+      "Various code libraries",
+      "web generators",
+      "Tableau"
+    ]
+  },
+  {
+    "key": "candlestick_chart",
+    "name": "Candlestick Chart",
+    "aliases": [
+      "Japanese Candlestick"
+    ],
+    "category": "Financial / Ranges",
+    "description": "Tracks financial price movements over time for assets (stocks, bonds, commodities). Each symbol compresses trading activity into a single interval plotted along a time axis.",
+    "data_required": "Open price, closing price, highest traded price, lowest traded price, and a defined time period for the horizontal axis.",
+    "use_when": "Spotting market trends, interpreting daily sentiment, recognizing psychological shifts between buyers and sellers. Aids in forecasting future price action.",
+    "notes": "Anatomy: Central rectangle = \"real body\" (gap between open/close). Upper/lower lines = \"shadows\" (peak/trough). Green/white = bullish (close > open); Red/black = bearish (close < open). Extended bodies = strong pressure; Compact ones = consolidation.",
+    "limitations": "Does not express events between open and close. Cannot measure intra-period volatility. Must not be mistaken for box plots.",
+    "similar": [
+      "Kagi Chart",
+      "OHLC Chart"
+    ],
+    "tools": [
+      "plotly",
+      "Vega-Lite",
+      "amCharts",
+      "Excel",
+      "Tableau"
+    ]
+  },
+  {
+    "key": "kagi_chart",
+    "name": "Kagi Chart",
+    "aliases": [],
+    "category": "Financial / Ranges",
+    "description": "Maps an asset's supply and demand through vertical line patterns. **Time-independent** — filters out market noise to emphasize major price shifts. X-axis = key action dates (not continuous timeline); Y-axis = value.",
+    "data_required": "Historical price action data and a predetermined \"reversal\" threshold to trigger directional changes.",
+    "use_when": "Traders prioritizing significant trend analysis over time-based data. Isolates key price movements and identifies supply/demand imbalances.",
+    "notes": "Anatomy: Lines extend vertically until hitting reversal threshold, then U-turn. \"Shoulder\" joins rising/declining lines; \"waist\" connects declining/rising lines. Yang line (thicker/green) = demand outpaces supply. Yin line (thinner/red) = supply outpaces demand. Trading Signals: Yin to Yang = buy signal. Yang to Yin = sell signal.",
+    "similar": [
+      "Candlestick Chart",
+      "OHLC Chart",
+      "Point & Figure Chart"
+    ],
+    "tools": [
+      "D3.js",
+      "FusionCharts",
+      "Wolfram",
+      "Plotivy"
+    ]
+  },
+  {
+    "key": "open_high_low_close_chart",
+    "name": "Open-High-Low-Close Chart",
+    "aliases": [
+      "OHLC",
+      "Price",
+      "Bar Chart"
+    ],
+    "category": "Financial / Ranges",
+    "description": "Tracks financial values across intervals. Plots a symbol representing two ranges: highest/lowest prices traded, and opening/closing price on that time period. Central vertical line = high-low span; left/right ticks = open/close values.",
+    "data_required": "Open, high, low, and close prices per interval. Vertical axis = monetary value; horizontal axis = time.",
+    "use_when": "Tracking data over time, spotting patterns, evaluating ranges. Interpret day-to-day market sentiment and forecast future price changes.",
+    "notes": "Color Coding: Bullish (close > open) vs. Bearish (close < open).",
+    "similar": [
+      "Candlestick Chart",
+      "Kagi Chart"
+    ],
+    "tools": [
+      "Plotly",
+      "AnyChart",
+      "ECharts",
+      "plotDB",
+      "Plotivy"
+    ]
+  },
+  {
+    "key": "point_figure_chart",
+    "name": "Point & Figure Chart",
+    "aliases": [
+      "P&F"
+    ],
+    "category": "Financial / Ranges",
+    "description": "Visualizes asset supply and demand using alternating vertical columns of Xs and Os. **Time-independent** — horizontal axis marks specific price-action dates; vertical axis tracks value. Xs = upward movements (buyers dominate); Os = downward shifts (sellers take control).",
+    "data_required": "Historical price data (closing, high, or low values). Two settings: **Box size** (minimum price change to add a symbol, filters minor fluctuations) and **Reversal amount** (price movement against trend to start new column).",
+    "use_when": "Identifying breakouts, mapping support/resistance zones, drawing trend lines. Detecting shifts in supply and demand dynamics.",
+    "notes": "Rules: Columns contain either Xs or Os, never mixed. Numerical markers (1-9 for Jan-Sep, A-C for Oct-Dec) may denote monthly starts.",
+    "similar": [
+      "Kagi Chart"
+    ],
+    "tools": [
+      "Python (mplfinance",
+      "pypnf)",
+      "R (rpnf)",
+      "Plotivy",
+      "StockCharts"
+    ]
+  },
+  {
+    "key": "brainstorm",
+    "name": "Brainstorm",
+    "aliases": [
+      "Mind Map"
+    ],
+    "category": "Brainstorming / Conceptual",
+    "description": "Visual diagram organizing interconnected ideas, words, images, and concepts. Method for generating ideas, identifying associations, categorizing thoughts, structuring information, and supporting study. Commonly functions as a note-taking aid during early project phases, collaborative work, and team-building.",
+    "data_required": "Central topic or project title, followed by related categories, subcategories, and associated keywords or concepts.",
+    "use_when": "Initial project planning, idea generation, organizing information, studying, collaborative sessions, boosting team morale.",
+    "notes": "Structure: Central topic in a shape (circle/cloud) at center → Categories radiating outward → Subcategories on each branch → Repeat for deeper levels. Functions: Tracks concepts and relationships.",
+    "tools": [
+      "yFiles (code)",
+      "Coggle",
+      "MindMup",
+      "Lucidchart",
+      "Plotivy",
+      "yEd live (web)",
+      "Adobe Illustrator",
+      "Apple Pages/Keynote",
+      "Microsoft Office (desktop)"
+    ]
+  },
+  {
+    "key": "illustration_diagram",
+    "name": "Illustration Diagram",
+    "aliases": [],
+    "category": "Brainstorming / Conceptual",
+    "description": "Combines images with textual guides (notes, labels, legends). Graphics can be symbolic, pictorial, or realistic. May incorporate enlargements and cross-sections for deeper analysis.",
+    "data_required": "Visual inputs (illustrations, rough sketches, wireframes, photographs) combined with accompanying annotations or a legend.",
+    "use_when": "Illustrating concepts, showing how things work, describing objects/places, showing how things move/change, providing additional insight.",
+    "tools": [
+      "Plotivy (web)",
+      "Adobe Illustrator",
+      "Affinity (desktop)"
+    ]
+  },
+  {
+    "key": "error_bars",
+    "name": "Error Bars",
+    "aliases": [],
+    "category": "Dashboards / Reference",
+    "description": "Visual overlay for Cartesian plots communicating data variability and measurement uncertainty. Shorter markers = tightly clustered values/higher precision. Longer markers = wider dispersion/reduced reliability.",
+    "data_required": "Ranged datasets processable into statistical metrics. Markers typically represent standard deviation, standard error, confidence intervals, or min/max values.",
+    "use_when": "Contextualizing precision alongside quantitative comparisons. Can be added to scatterplots, dot plots, bar charts, line graphs, area graphs, histograms, multi-set bar charts, and span charts.",
+    "notes": "Visual: Cap-tipped lines extending from data points or chart edges. Parallel to the relevant quantitative axis (vertical or horizontal). Can be symmetrical or asymmetrical for skewed distributions.",
+    "tools": [
+      "amCharts",
+      "AnyChart",
+      "Highcharts",
+      "Vega",
+      "Vega-Lite",
+      "ZingChart",
+      "Google Docs",
+      "Plotivy",
+      "Plotly",
+      "Apple Numbers",
+      "Microsoft Office",
+      "Tableau"
+    ]
+  },
+  {
+    "key": "timetable",
+    "name": "Timetable",
+    "aliases": [],
+    "category": "Dashboards / Reference",
+    "description": "Referencing and management tool for scheduled events, tasks, and actions. Structuring information chronologically or alphabetically enables faster lookup. Commonly used for arrival/departure times of transportation.",
+    "data_required": "Information on planned events, tasks, actions, and their corresponding times or sequences.",
+    "use_when": "Tracking data over time and functioning as a reference tool.",
+    "similar": [
+      "Calendar"
+    ],
+    "tools": [
+      "Google Docs",
+      "Plotivy (web)",
+      "Adobe Illustrator",
+      "Apple Numbers",
+      "Microsoft Office (desktop)"
+    ]
+  }
+]
