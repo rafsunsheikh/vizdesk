@@ -8,13 +8,13 @@ class Vizdesk < Formula
   desc "Terminal app that suggests cleaning and charts for CSV/Excel files and draws PNGs"
   homepage "https://github.com/rafsunsheikh/vizdesk"
   url "https://files.pythonhosted.org/packages/source/v/vizdesk/vizdesk-0.2.0.tar.gz"
-  sha256 "REPLACE_WITH_SDIST_SHA256"
+  sha256 "5c218e3e2ae766929109990219c81648d5f2e8ad8dfbeadd211da3fe5e722ecf"
   license "MIT"
 
-  depends_on "python@3.12"
+  depends_on "python@3.14"
 
   def install
-    python = Formula["python@3.12"].opt_bin/"python3.12"
+    python = Formula["python@3.14"].opt_bin/"python3.14"
     system python, "-m", "venv", libexec
     # pandas, numpy and matplotlib come as prebuilt wheels from PyPI, which avoids
     # long source builds. This is why the formula suits a tap, not homebrew-core.
