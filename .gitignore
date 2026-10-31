@@ -9,3 +9,13 @@ examples/*.csv
 examples/*.xlsx
 node_modules/
 datasets/
+
+# Recording working files: regenerate with docs/recording/record.py
+docs/recording/frames/
+docs/recording/ending/
+docs/recording/workspace/vizdesk-output/
+.venv-rec/
+
+# Marketing working notes, not part of the project
+LAUNCH.md
+docs/post-sideproject.md

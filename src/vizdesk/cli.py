@@ -294,9 +294,17 @@ def main(argv: list[str] | None = None) -> None:
 
     matplotlib.use("Agg")
     parser = build_parser()
-    args = parser.parse_args(argv)
+    raw = list(argv if argv is not None else sys.argv[1:])
+    # `vizdesk data.csv` means `vizdesk tui data.csv`, which is what the README
+    # documents. This has to happen before parse_args: argparse exits with
+    # "invalid choice" on an unknown first word, so a fallback placed after it
+    # never runs.
+    commands = set(parser._subparsers._group_actions[0].choices) if parser._subparsers else set()
+    if raw and raw[0] not in commands and not raw[0].startswith("-"):
+        raw = ["tui", *raw]
+    args = parser.parse_args(raw)
     if not args.command:
-        args = parser.parse_args(["tui", *(argv if argv is not None else sys.argv[1:])])
+        args = parser.parse_args(["tui", *raw])
     try:
         args.func(args)
     except (FileNotFoundError, ValueError, KeyError) as exc:
