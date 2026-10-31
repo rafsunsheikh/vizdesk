@@ -1,0 +1,34 @@
+# Maintainer: Md Rafsun Sheikh <rafsun.sheikh@audd.digital>
+pkgname=vizdesk
+pkgver=0.2.0
+pkgrel=1
+pkgdesc="Terminal app that scans CSV and Excel files, suggests cleaning and charts, and draws PNG figures"
+arch=('any')
+url="https://github.com/rafsunsheikh/vizdesk"
+license=('MIT')
+# Every one of these is in the official repos, so this package pulls nothing
+# from the AUR itself.
+depends=(
+  'python'
+  'python-pandas'
+  'python-numpy'
+  'python-matplotlib'
+  'python-openpyxl'
+  'python-pillow'
+  'python-textual'
+)
+makedepends=('python-build' 'python-installer' 'python-wheel' 'python-hatchling')
+source=("https://files.pythonhosted.org/packages/source/${pkgname::1}/$pkgname/$pkgname-$pkgver.tar.gz")
+sha256sums=('5c218e3e2ae766929109990219c81648d5f2e8ad8dfbeadd211da3fe5e722ecf')
+
+build() {
+  cd "$srcdir/$pkgname-$pkgver"
+  python -m build --wheel --no-isolation
+}
+
+package() {
+  cd "$srcdir/$pkgname-$pkgver"
+  python -m installer --destdir="$pkgdir" dist/*.whl
+  install -Dm644 LICENSE "$pkgdir/usr/share/licenses/$pkgname/LICENSE"
+  install -Dm644 README.md "$pkgdir/usr/share/doc/$pkgname/README.md"
+}

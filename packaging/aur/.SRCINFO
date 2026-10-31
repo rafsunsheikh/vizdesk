@@ -1,0 +1,22 @@
+pkgbase = vizdesk
+	pkgdesc = Terminal app that scans CSV and Excel files, suggests cleaning and charts, and draws PNG figures
+	pkgver = 0.2.0
+	pkgrel = 1
+	url = https://github.com/rafsunsheikh/vizdesk
+	arch = any
+	license = MIT
+	makedepends = python-build
+	makedepends = python-installer
+	makedepends = python-wheel
+	makedepends = python-hatchling
+	depends = python
+	depends = python-pandas
+	depends = python-numpy
+	depends = python-matplotlib
+	depends = python-openpyxl
+	depends = python-pillow
+	depends = python-textual
+	source = https://files.pythonhosted.org/packages/source/v/vizdesk/vizdesk-0.2.0.tar.gz
+	sha256sums = 5c218e3e2ae766929109990219c81648d5f2e8ad8dfbeadd211da3fe5e722ecf
+
+pkgname = vizdesk

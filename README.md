@@ -38,22 +38,47 @@ There is **no LLM** inside. Every suggestion comes from fixed rules and statisti
 
 ## Install
 
+**Linux and macOS, one line**
+
+```bash
+curl -sSL https://raw.githubusercontent.com/rafsunsheikh/vizdesk/main/packaging/install/install.sh | sh
+```
+
+It puts vizdesk in its own environment and the `vizdesk` command on your PATH.
+Nothing else on your machine is changed. It uses `uv` or `pipx` if you have
+them, offers to fetch `uv` if you do not, and falls back to a private virtual
+environment. Read it first if you prefer: the script is in this repository at
+`packaging/install/install.sh`.
+
+**If you already have uv or pipx**
+
 ```bash
 uv tool install vizdesk        # or: pipx install vizdesk
 ```
 
 Try it without installing: `uvx vizdesk data.csv`
 
-<details>
-<summary>npm and Homebrew</summary>
+**pip**
+
+```bash
+pip install vizdesk            # inside a virtual environment or a project
+```
+
+The routes above use `uv` or `pipx` because vizdesk is a command, not a library:
+they give it its own environment and put `vizdesk` on your PATH. Use `pip` when
+you want vizdesk inside a project or a notebook environment you already have. A
+bare `pip install` into the system Python is refused on most machines now, with
+`externally-managed-environment`.
+
+**npm and Homebrew**
 
 ```bash
 npm install -g vizdesk                 # runs the Python package through uv, pipx or a private environment
 brew install rafsunsheikh/tap/vizdesk  # or: brew tap rafsunsheikh/tap, then brew install vizdesk
 ```
 
-All three install the same app. Python 3.10 or newer is needed; npm and Homebrew set it up for you.
-</details>
+All of these install the same app. Python 3.10 or newer is needed; the installer
+script, npm and Homebrew set it up for you.
 
 ## Quick start
 
@@ -86,12 +111,10 @@ Your files are never changed. Figures go to `./vizdesk-output` unless you pass `
   </tr>
 </table>
 
-<details>
-<summary>The Data and Clean tabs</summary>
+**The Data and Clean tabs**
 
 <img src="https://raw.githubusercontent.com/rafsunsheikh/vizdesk/main/docs/images/tui-data.svg" alt="Data tab with the column profile of the Titanic file and a preview of its rows">
 <img src="https://raw.githubusercontent.com/rafsunsheikh/vizdesk/main/docs/images/tui-clean.svg" alt="Clean tab listing suggested cleaning steps, safe ones already ticked">
-</details>
 
 ### Keys
 
@@ -109,12 +132,10 @@ Your files are never changed. Figures go to `./vizdesk-output` unless you pass `
 
 <sub>`vizdesk auto titanic.csv --goal target`: the six charts it picked, unedited.</sub>
 
-<details>
-<summary>Two more examples: California housing and Netflix titles</summary>
+**Two more examples: California housing and Netflix titles**
 
 <img src="https://raw.githubusercontent.com/rafsunsheikh/vizdesk/main/docs/images/example-housing-explore.png" alt="Overview of California housing: house value against income, value distribution with the cap at 500,001, a map coloured by value, and value by ocean proximity">
 <img src="https://raw.githubusercontent.com/rafsunsheikh/vizdesk/main/docs/images/example-netflix-explore.png" alt="Overview of Netflix titles: movie lengths, titles by type and rating, titles added per year, and the most common genres">
-</details>
 
 Each figure is saved as four files:
 
@@ -141,8 +162,7 @@ vizdesk catalog part whole                          # search the chart catalog
 vizdesk show out/sales.png                          # preview a PNG in the terminal
 ```
 
-<details>
-<summary>Panel fields and options</summary>
+### Panel fields and options
 
 Fields: `chart`, `x`, `y`, `hue` (colour), `size`, `columns=a+b+c`, `agg` (`auto`, `count`, `sum`, `mean`, `median`, `min`, `max`), `title`, `top_n`, `bins`, `log_y`. `agg=auto` sums columns that look like totals (sales, revenue, units ...) and averages the rest.
 
@@ -157,7 +177,6 @@ Any other `key=value` is an option:
 | `min_rows` | `min_rows=30` | hide groups smaller than this in 100% bars (default 10) |
 
 Some charts read their own, such as `rolling=50` (line), `reversal=4%` (kagi), `last=120` (candlestick) and `geojson=regions.geojson; key=name` (maps). The Compose tab lists them for the selected chart.
-</details>
 
 ## How it decides
 
@@ -176,6 +195,137 @@ You pick a goal; vizdesk picks the charts that answer it for your columns.
 | **data quality** | missing values, outliers, capped values |
 
 The rules were tuned on seven popular Kaggle datasets (Telco churn, Titanic, California housing, Netflix, Superstore, S&P 500, Wine reviews) and checked against the charts drawn in their top-voted notebooks [2]. Each fix is kept as a test.
+
+## The chart catalog
+
+All 66 techniques, and vizdesk can draw every one of them. Search from the
+Catalog tab (`F6`) or with `vizdesk catalog <words>`.
+
+### Distributions, 8
+
+| Chart | What it shows |
+|---|---|
+| Histogram | How often values fall in each range. The usual first look at one number column. |
+| Histogram Grid | One small histogram per numeric column, so you can compare shapes at a glance. |
+| Density Plot | A smooth version of a histogram, with no bins to choose. |
+| Box & Whisker Plot | The middle half of the data, the median, and the outliers. |
+| Violin Plot | A box plot with the full shape of the distribution drawn around it. |
+| ECDF Plot | For every value, the share of rows at or below it. Nothing is hidden or binned. |
+| Q-Q Plot | Whether your data follows a normal curve. Points on the diagonal mean yes. |
+| Stem & Leaf Plot | A small table that keeps every value while still showing the shape. |
+
+### Comparisons, 12
+
+| Chart | What it shows |
+|---|---|
+| Bar Chart | How much of something in each category. The workhorse. |
+| Multi-set Bar Chart | Several series side by side under each category. |
+| Dot Plot (Cleveland) | One dot per category. Less ink than bars and no zero baseline needed. |
+| Lollipop Chart | A bar replaced by a line and a dot. Easier to read when bars are similar lengths. |
+| Dumbbell Chart | Two dots joined by a line: the gap between before and after. |
+| Bullet Graph | One number against its target and a good or bad band. Built for dashboards. |
+| Radar Chart | Several measures for one thing, on spokes from a centre. |
+| Radial Bar Chart | A bar chart bent into rings. |
+| Radial Column Chart | Bars growing outward from a centre, grouped by spoke. |
+| Marimekko Chart | Two categories at once: bar width is one, bar height the other. |
+| Pictogram Chart | Repeated icons instead of bars, one icon per unit. |
+| Tally Chart | Counts as tally marks, the way you would record them by hand. |
+
+### Relationships, 8
+
+| Chart | What it shows |
+|---|---|
+| Scatterplot | Whether two numbers move together. |
+| Bubble Chart | A scatterplot with a third number as the size of each dot. |
+| Hexbin Plot | A scatterplot for very many points: hexagons coloured by how many land in each. |
+| Scatter Matrix | A scatterplot for every pair of numeric columns, in one grid. |
+| Correlation Heatmap | How strongly every pair of numbers moves together, from -1 to +1. |
+| Heatmap (Cross-tab) | A grid coloured by the count for each pair of categories. |
+| Parallel Coordinates Plot | One line per row across several axes, to spot groups and patterns. |
+| Span Chart | The range between a low and a high value, rather than single points. |
+
+### Part to whole, 5
+
+| Chart | What it shows |
+|---|---|
+| Pie Chart | Shares of a total, as slices. Best with a handful of categories. |
+| Donut Chart | A pie with the middle removed, which makes arcs easier to compare. |
+| Stacked Bar Graph | Totals per bar, split into their parts. |
+| 100% Stacked Bar Chart | Shares per bar, every bar the same height. Compares mix, not size. |
+| Treemap | Nested rectangles sized by value. Good for hierarchies with many items. |
+
+### Over time, 8
+
+| Chart | What it shows |
+|---|---|
+| Line Graph | How a number changes over time. |
+| Area Graph | A line with the space beneath it filled, to stress the total. |
+| Stacked Area Graph | Several series stacked, so you see both the parts and the whole. |
+| Stream Graph | Stacked areas around a centre line, for how a mix shifts over time. |
+| Calendar | Values laid out on monthly grids, to find days and weekday patterns. |
+| Timeline | Events in order along a line. |
+| Gantt Chart | Tasks as bars across a schedule, showing overlap and duration. |
+| Spiral Plot | Long time series wound into a spiral, to expose repeating cycles. |
+
+### Maps, 5
+
+| Chart | What it shows |
+|---|---|
+| Choropleth Map | Regions shaded by a value. Needs a GeoJSON file of the boundaries. |
+| Bubble Map | Circles on a map sized by value. |
+| Dot Map | One marker per occurrence, for where things are concentrated. |
+| Connection Map | Lines joining places, for links and routes. |
+| Flow Map | Lines whose thickness shows how much moves between places. |
+
+### Networks and hierarchies, 6
+
+| Chart | What it shows |
+|---|---|
+| Network Diagram | Things as dots and their connections as lines. |
+| Arc Diagram | Connections as arcs above a single row of nodes. |
+| Chord Diagram | Flows between groups arranged in a circle, as ribbons. |
+| Tree Diagram | A branching structure from one root. |
+| Sunburst Diagram | A hierarchy as rings, the centre being the top level. |
+| Circle Packing | A hierarchy as circles inside circles, sized by value. |
+
+### Flows and processes, 3
+
+| Chart | What it shows |
+|---|---|
+| Sankey Diagram | Where quantities go, with thickness showing how much. |
+| Parallel Sets | How rows divide across several categorical columns. |
+| Flow Chart | Steps and decisions in a process. |
+
+### Text, 2
+
+| Chart | What it shows |
+|---|---|
+| Word Frequency Bar | The most common words in a text column, filler words removed. |
+| Word Cloud | The same counts as sized text. |
+
+### Financial, 4
+
+| Chart | What it shows |
+|---|---|
+| Candlestick Chart | Open, high, low and close for each period, in one symbol. |
+| Open-High-Low-Close Chart | The same four prices drawn as ticks rather than bodies. |
+| Kagi Chart | Price direction only, ignoring time, to filter out small moves. |
+| Point & Figure Chart | Columns of Xs and Os for rises and falls, also ignoring time. |
+
+### Reference and conceptual, 4
+
+| Chart | What it shows |
+|---|---|
+| Error Bars | How uncertain each value is, drawn onto another chart. |
+| Timetable | Scheduled events in a table you can scan quickly. |
+| Brainstorm | Ideas and the links between them. |
+| Illustration Diagram | A labelled picture, for explaining rather than measuring. |
+
+### Data quality, 1
+
+| Chart | What it shows |
+|---|---|
+| Missing Values Map | Which cells are empty, and whether the gaps cluster. |
 
 ## Alternatives
 
